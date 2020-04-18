@@ -1,0 +1,12 @@
+1、由于国内go get是在是次，于是改用go mod
+2、具体步骤
+	2.1、创建go_test文件夹
+	2.2、执行go mod init => 在gin_test下生成go.mod、go.sum
+	2.3、执行 go run server.go 运行代码会发现 go mod 会自动查找依赖自动下载
+	2.4、下载的依赖包存在pkg的mod下面
+3、export GO111MODULE=on
+4、上传git
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:Sangewang/go_gin.git
+git push -u origin master
