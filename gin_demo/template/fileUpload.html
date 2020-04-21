@@ -5,12 +5,20 @@
     <title>上传文件</title>
 </head>
 <body>
-    <form method="post" action="/file/multiUpload" enctype="multipart/form-data">
-        <label>上传文件</label>
-        <input type="file" id="insert" value="请选择" name="file">
-        <input type="file" id="insert" value="请选择" name="file">
-        <input type="file" id="insert" value="请选择" name="file">
-        <button type="submit">上传</button>
-    </form>
+    <ul>
+        <form method="post" action="/file/singleUpload" enctype="multipart/form-data">
+            <label>单文件上传</label>
+            <input type="file" id="insert" value="请选择" name="file">
+            <button type="submit">上传</button>
+        </form>
+    </ul>
+    <ul>
+        <form method="post" action="/file/multiUpload" enctype="multipart/form-data">
+            Name: <input type="text" name="name"><br>
+            Email: <input type="email" name="email"><br>
+            Files: <input type="file" name="files" multiple><br><br>
+            <input type="submit" value="多文件上传">
+        </form>
+    </ul>
 </body>
 </html>

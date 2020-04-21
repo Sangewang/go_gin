@@ -23,7 +23,17 @@ func main() {
 		user.GET("/form", controller.RenderForm)
 		user.POST("/form/post", controller.PostForm)
 		// 可以添加其它的路由请求
+	}
 
+	file := router.Group("/file")
+	{
+		// 跳转到文件上传界面
+		file.GET("/view", controller.RenderView)
+		// 根据表单上传
+		file.POST("/singleUpload", controller.FormUpload)
+		file.POST("/multiUpload", controller.MultiUpload)
+		// base64上传图片
+		// file.POST("/upload", controller.Base64Upload)
 	}
 
 	// 指定端口号和地址
