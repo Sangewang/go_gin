@@ -5,7 +5,7 @@
 	2.3、执行 go run server.go 运行代码会发现 go mod 会自动查找依赖自动下载
 	2.4、下载的依赖包存在pkg的mod下面
 3、export GO111MODULE=on
-4、上传git
+4、上传git 方法
 git add README.md
 git commit -m "first commit"
 git remote add origin git@github.com:Sangewang/go_gin.git
