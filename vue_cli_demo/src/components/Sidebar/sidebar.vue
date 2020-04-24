@@ -79,33 +79,34 @@
 							<el-dropdown-item>删除</el-dropdown-item>
 						</el-dropdown-menu>
 					</el-dropdown>
-					<span>王小虎</span>
+					<!--从login.vue获取到的登录人信息，后续会有权限认证等-->
+					<span>{{ this.$userInfo.username }}</span>
 				</el-header>
 
 				<el-main>
 					<el-table :data="tableData" border style="width: 100%">
-						<el-table-column fixed prop="id" label="序号" width="80">
+						<el-table-column fixed prop="uid" label="序号" width="80">
 						</el-table-column>
-						<el-table-column fixed prop="date" label="日期" width="120">
+						<el-table-column fixed prop="create_time" label="日期" width="180">
 						</el-table-column>
-						<el-table-column prop="name" label="姓名" width="100">
+						<el-table-column prop="username" label="姓名" width="100">
 						</el-table-column>
 						<el-table-column prop="province" label="省份" width="100">
 						</el-table-column>
 						<el-table-column prop="city" label="市区" width="100">
 						</el-table-column>
-						<el-table-column prop="address" label="地址" width="450">
+						<el-table-column prop="address" label="地址" width="400">
 						</el-table-column>
-						<el-table-column prop="zip" label="邮编" width="120">
+						<el-table-column prop="code" label="邮编" width="120">
 						</el-table-column>
 						<el-table-column label="操作" width="300">
 							<template slot-scope="scope">
-								<el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-								<el-button type="text" size="small">编辑</el-button>
-								<el-button type="text" size="small">删除</el-button>
+								<el-button @click="handleClick(scope.row, 'search')" type="text" size="small">查看</el-button>
+								<el-button @click="handleClick(scope.row, 'modify')" type="text" size="small">编辑</el-button>
+								<el-button @click="handleClick(scope.row, 'delete')" type="text" size="small">删除</el-button>
 							</template>
 						</el-table-column>
-						<el-table-column prop="info" label="备注" width="200">
+						<el-table-column prop="detail" label="备注" width="200">
 						</el-table-column>
 					</el-table>
 				</el-main>
@@ -139,21 +140,19 @@
 </style>
 
 <script>
+	// import axios from 'axios'
 	export default {
 		data() {
-			// 可以去后端请求
-			const item = {
-				id: this.randomNum(0, 100),
-				date: '2020-05-02',
-				name: '王小虎',
-				province: '北京',
-				city: '海淀',
-				zip: '100444',
-				address: '北京市海淀区上地信息路',
-				info: 'test'
-			};
+			// 在login的时候已经读取了后端的数据
+			var dataArray = [];
+			for (var key in this.$dataInfo) {
+				var item = this.$dataInfo[key];
+				console.log(item); //AA,BB,CC,DD
+				dataArray.push(item)
+			}
 			return {
-				tableData: Array(10).fill(item),
+				// tableData: Array(10).fill(item),
+				tableData: dataArray,
 				isCollapse: true,
 				value: new Date()
 			}
@@ -165,13 +164,35 @@
 			handleClose(key, keyPath) {
 				console.log(key, keyPath);
 			},
-			handleClick(row) {
-				console.log(row);
-				alert(row.id);
+			// 信息的增删改查
+			handleClick(object, action) {
+				if (action == 'search') {
+					//alert("查询 id = " + object.id + "的信息");
+					this.showMsg("查询 id = " + object.id + "的信息");
+				} else if (action == 'delete') {
+					this.showMsg("删除 id = " + object.id + "的信息");
+				} else if (action == 'modify') {
+					this.showMsg("修改 id = " + object.id + "的信息");
+				} else {
+					this.showMsg("未知的action = " + action)
+				}
+
+			},
+			showMsg(msg) {
+				this.$alert(msg, '提示信息', {
+					confirmButtonText: '确定',
+					callback: action => {
+						this.$message({
+							type: 'info',
+							message: `action: ${ action }`
+						});
+					}
+				});
 			},
 			randomNum(min, max) {
 				return Math.floor(Math.random() * (max - min) + min)
-			}
+			},
+
 		}
 	};
 </script>

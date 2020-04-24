@@ -20,6 +20,7 @@
  
 <script>
 	import axios from 'axios'
+	import Vue from 'vue' 
     export default {
         name: "login",
         data() {
@@ -42,6 +43,10 @@
 						console.log(successResponse)
                         if (successResponse.data.code === 0) {
 							// alert(successResponse.data.msg)
+							// 将全局变量模块挂载到Vue.prototype中
+							Vue.prototype.$userInfo = this.loginForm; 
+							// 登录成功后初始化数据
+							Vue.prototype.$dataInfo = successResponse.data.data;
 							// 登陆成功后进行页面跳转
                             this.$router.replace({path: '/Sidebar/sidebar'})
                         } else {
