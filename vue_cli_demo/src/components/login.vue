@@ -35,7 +35,7 @@
         methods: {
             login() {
                 axios
-                    .post('http://172.22.200.31:9090/user/login', {
+                    .post('http://127.0.0.1:9090/user/login', {
                         username: this.loginForm.username,
                         password: this.loginForm.password
                     })

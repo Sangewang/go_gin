@@ -168,11 +168,11 @@
 			handleClick(object, action) {
 				if (action == 'search') {
 					//alert("查询 id = " + object.id + "的信息");
-					this.showMsg("查询 id = " + object.id + "的信息");
+					this.showMsg("查询 uid = " + object.uid + "的信息");
 				} else if (action == 'delete') {
-					this.showMsg("删除 id = " + object.id + "的信息");
+					this.showMsg("删除 uid = " + object.uid + "的信息");
 				} else if (action == 'modify') {
-					this.showMsg("修改 id = " + object.id + "的信息");
+					this.showMsg("修改 uid = " + object.uid + "的信息");
 				} else {
 					this.showMsg("未知的action = " + action)
 				}
@@ -181,12 +181,13 @@
 			showMsg(msg) {
 				this.$alert(msg, '提示信息', {
 					confirmButtonText: '确定',
+					/*
 					callback: action => {
 						this.$message({
 							type: 'info',
 							message: `action: ${ action }`
 						});
-					}
+					}*/
 				});
 			},
 			randomNum(min, max) {
