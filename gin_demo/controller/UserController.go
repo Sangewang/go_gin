@@ -210,7 +210,7 @@ func ConfirmLoginInfo(context *gin.Context) {
 		})
 	} else {
 		log.Print("能查询到记录 = ", row_id)
-		oldData := GetAllDetailInfo()
+		oldData := GetAllBasicInfo()
 		jsonData, _ := json.Marshal(&oldData)
 		context.JSON(200, gin.H{
 			"code" : 0,
@@ -232,7 +232,7 @@ func ConfirmLoginInfo(context *gin.Context) {
 }
 
 // 获取全部的细节信息
-func GetAllDetailInfo() map[int]model.TUserDetailInfo {
+func GetAllBasicInfo() map[int]model.TUserDetailInfo {
 	/*
 	println(">>>> confirm GetAllDetailInfo, receive json data <<<<")
 	data, _ := ioutil.ReadAll(context.Request.Body)
@@ -288,7 +288,64 @@ func GetAllDetailInfo() map[int]model.TUserDetailInfo {
 		})
 	}
 	*/
+}
 
+
+// 获取全部的细节信息
+func GetAllDetailInfo(context *gin.Context) {
+	println(">>>> confirm GetAllDetailInfo, receive json data <<<<")
+	data, _ := ioutil.ReadAll(context.Request.Body)
+	fmt.Printf("ctx.Request.body: %v", string(data))
+	
+	rows, err := db.Query("select id, username, province, city, address, code, detail, create_time from t_user_detail")
+	fmt.Println("rows = ", rows, "err = ", err)
+	checkError(err)
+
+	var s model.TUserDetailInfo
+	var gCount = 0
+	sMap := make(map[int]model.TUserDetailInfo)
+	for rows.Next() {
+        var uid int
+        var username string
+		var province string
+		var city string
+		var address string
+		var code string
+		var detail string
+		var create_time string
+		err = rows.Scan(&uid, &username, &province, &city, &address, &code, &detail, &create_time)
+		s.Uid = uid
+		s.Username = username
+		s.Province = province
+		s.City = city
+		s.Address = address
+		s.Code = code
+		s.Detail = detail
+		s.CreateTime = create_time
+		sMap[gCount] = s
+		gCount += 1
+        checkError(err)
+	}
+	fmt.Println("结构体字典 sMap = ", sMap)
+	postData, err := json.Marshal(&sMap)
+	if err != nil{
+		context.JSON(200, gin.H{
+			"code" : -1,
+			"msg"  : "验证失败",
+			"data" : postData,
+		})
+
+	} else {
+		//输出序列化后的结果
+		fmt.Printf("序列化后 = %v\n", string(postData))
+		context.JSON(200, gin.H{
+			"code" : 0,
+			"msg"  : "验证成功",
+			"data"  : sMap,
+			"json_data" : postData,
+		})
+	}
+	
 }
 
 // 跳转html

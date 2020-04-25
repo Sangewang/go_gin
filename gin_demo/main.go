@@ -26,7 +26,7 @@ func main() {
 	user := router.Group("/user")
 	{	// 请求参数在请求路由上
 		user.POST("/login", controller.ConfirmLoginInfo)
-		//user.POST("/detail", controller.GetAllDetailInfo)
+		user.POST("/detail", controller.GetAllDetailInfo)
 		user.GET("/get/:id/:username", controller.QueryById)
 		user.GET("/query", controller.QueryParam)
 		user.POST("/insert", controller.InsertNewUser)
