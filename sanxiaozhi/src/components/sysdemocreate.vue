@@ -2,14 +2,14 @@
 	<div class="app-container">
 		<el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
 			<el-form-item label="字典名称" prop="dictName">
-				<el-input v-model="queryParams.dictName" placeholder="请输入字典名称" clearable size="small" style="width: 240px" @keyup.enter.native="handleQuery" />
+				<el-input v-model="queryParams.dictName" placeholder="请输入字典名称" clearable size="small" style="width: 200px" @keyup.enter.native="handleQuery" />
 			</el-form-item>
 			<el-form-item label="字典类型" prop="dictType">
-				<el-input v-model="queryParams.dictType" placeholder="请输入字典类型" clearable size="small" style="width: 240px" @keyup.enter.native="handleQuery" />
+				<el-input v-model="queryParams.dictType" placeholder="请输入字典类型" clearable size="small" style="width: 200px" @keyup.enter.native="handleQuery" />
 			</el-form-item>
-			<el-form-item label="状态" prop="status">
-				<el-select v-model="queryParams.status" placeholder="字典状态" clearable size="small" style="width: 240px">
-					<el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+			<el-form-item label="字典状态 : " prop="status">
+				<el-select  v-model="queryParams.status" placeholder="字典状态" clearable size="small" style="width: 200px">
+					<el-option v-for="item in statusOptions" :value="item.value" :key="item.label" name="sendValue">{{ item.value }}</el-option>
 				</el-select>
 			</el-form-item>
 
@@ -29,8 +29,8 @@
 		<el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" align="center" />
 			<el-table-column label="字典编号" width="80" align="center" prop="dictId" />
-			<el-table-column label="字典名称" align="center" prop="dictName" :show-overflow-tooltip="true"/>
-			<el-table-column label="字典类型" align="center" prop="dictType" :show-overflow-tooltip="true"/>
+			<el-table-column label="字典名称" align="center" prop="dictName" :show-overflow-tooltip="true" />
+			<el-table-column label="字典类型" align="center" prop="dictType" :show-overflow-tooltip="true" />
 			<el-table-column label="状态" align="center" prop="status" :formatter="statusFormat" />
 			<el-table-column label="备注" align="center" prop="remark" :show-overflow-tooltip="true" />
 			<el-table-column label="创建时间" align="center" prop="create_time" width="180"></el-table-column>
@@ -41,7 +41,7 @@
 				</template>
 			</el-table-column>
 		</el-table>
-		<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageIndex" :limit.sync="queryParams.pageSize" @pagination="getList"/>
+		<pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageIndex" :limit.sync="queryParams.pageSize" @pagination="getList" />
 		<!--
 		<el-pagination :page-size="10" :pager-count="2" layout="prev, pager, next" :total="2"></el-pagination>
 		-->
@@ -63,17 +63,28 @@ export default {
 			multiple: true,
 			// 总条数
 			total: 0,
-			// 状态数据字典
-			statusOptions: [],
 			// 字典表格数据
 			typeList: [],
+			sendValue: '',
+			// 查询的条件
+			query_params: {
+				qdictName: 'All',
+				qdictType: 'All',
+				qstatus  : 'All'
+			},
+			// 状态数据字典
+			statusOptions: [
+				{ value: 'All', label: '-1' },
+				{ value: '正常', label: '0'  },
+				{ value: '异常', label: '1'  },
+			],
 			// 查询参数
 			queryParams: {
 				pageIndex: 1,
 				pageSize: 10,
-				dictName: undefined,
-				dictType: undefined,
-				status: undefined
+				dictName: 'All',
+				dictType: 'All',
+				status: 'All'
 			}
 		};
 	},
@@ -83,15 +94,15 @@ export default {
 	methods: {
 		// 把状态栏进行格式化
 		statusFormat(row) {
-			// showMsg(this, row);
-			var status_dict = {'0': '正常', '1':'异常'};
-			return status_dict[row.status];
+			var status_dict = {'0': '正常', '1':'异常'}
+			return status_dict[row.status]
 		},
 		/** 查询字典类型列表 */
 		getList() {
 			// 当前的查询效率一般，应该去分页查询，直接查询某一页的数据
 			var tmpDataArray = [];
-			this.$fetch('/system/dict').then(response => {
+			showMsg(this, this.query_params);
+			this.$post('/system/dict', this.query_params).then(response => {
 				console.log(response);
 				var tmpDataInfo = response.data;
 				var datalen = Object.keys(tmpDataInfo).length;
@@ -117,14 +128,21 @@ export default {
 				this.loading = false;
 				this.typeList = tmpDataArray;
 			});
-			
-			
-			
+
+
+
 		},
 		/** 搜索按钮操作 */
 		handleQuery() {
 			this.queryParams.pageIndex = 1;
-			showMsg(this, '搜索功能未完成');
+
+			// showMsg(this, this.typeList);
+			// 根据条件进行过滤
+			// alert(this.queryParams.dictName)
+			this.query_params['qdictName'] = this.queryParams.dictName === '' ? 'All' : this.queryParams.dictName
+			this.query_params['qdictType'] = this.queryParams.dictType === '' ? 'All' : this.queryParams.dictType
+			this.query_params['qstatus'] = this.queryParams.status === '' ? 'All' : this.queryParams.status
+			this.getList();
 		},
 		/** 重置按钮操作 */
 		resetQuery() {

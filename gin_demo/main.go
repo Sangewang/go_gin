@@ -38,7 +38,7 @@ func main() {
 	// 路由组 system => /system/dict
 	sysd := router.Group("/system")
 	{	// 请求参数在请求路由上
-		sysd.GET("/dict", controller.GetSysDictTypeInfo)
+		sysd.POST("/dict", controller.GetSysDictTypeInfo)
 		
 		// 可以添加其它的路由请求
 	}
