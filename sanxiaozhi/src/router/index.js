@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import home from '../components/home'
 import login from '../components/login'
 import page1 from '../components/page1'
-import page2 from '../components/page2'
+import sysdemoperate from '../components/sysdemoperate'
+import sysdemocreate from '../components/sysdemocreate'
 import calendar from '../components/calendar'
 import table from '../components/table'
 import chart from '../components/chart'
@@ -37,9 +38,14 @@ export default new Router({
 					component: page1
 				},
 				{
-					path: '/page2',
-					name: 'page2',
-					component: page2
+					path: '/sysdemocreate',
+					name: 'sysdemocreate',
+					component: sysdemocreate
+				},
+				{
+					path: '/sysdemoperate',
+					name: 'sysdemoperate',
+					component: sysdemoperate
 				},
 				{
 					path: '/calendar',

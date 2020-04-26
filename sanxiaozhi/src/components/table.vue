@@ -1,6 +1,17 @@
 <template>
 	<div>
-		<el-row><el-button type="primary" icon="el-icon-search" @click="searchInfo">查询</el-button></el-row>
+		<!--
+		<div class="demo-input-size" style="float:left;padding:5px;color:white;margin-left:2%;width:15%">
+			<el-input placeholder="请输入内容" suffix-icon="el-icon-date" v-model="input1"></el-input>
+			<el-input size="medium" placeholder="请输入内容" suffix-icon="el-icon-date" v-model="input2" ></el-input>
+			<el-input size="small" placeholder="请输入内容" suffix-icon="el-icon-date" v-model="input3"></el-input>
+			<el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-date" v-model="input4"></el-input>
+		</div>
+		-->
+		<el-row>
+			<el-col :span="12" style=" width=50;float:left;padding:15px; margin-left:5%"><el-input v-model="username" placeholder="姓名"></el-input></el-col>
+			<el-col :span="12" style="float:left;padding:15px; margin-left:5%"><el-button type="primary" icon="el-icon-search" @click="searchInfo">搜索</el-button></el-col>
+		</el-row>
 		<el-table ref="multipleTable" :data="tableData" border tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="50"></el-table-column>
 			<el-table-column prop="uid" label="序号" width="80"></el-table-column>
@@ -23,12 +34,13 @@
 </template>
 
 <script>
-import { showMsg } from "../api/message.js"
+import { showMsg } from '../api/message.js';
 export default {
 	data() {
 		// 查询后端的数据
 		var dataArray = this.searchInfo();
 		return {
+			username: '',
 			tableData: dataArray,
 			multipleSelection: []
 		};

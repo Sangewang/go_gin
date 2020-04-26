@@ -3,10 +3,11 @@ import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/index.js'
+import Pagination from './components/Pagination'
 
 import { Scrollbar, Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
  
-import { post, fetch, patch, put } from './api/request'
+import { post, fetch, patch, put } from './api/http'
 
 //定义全局变量
 Vue.prototype.$post = post;
@@ -22,6 +23,9 @@ Vue.use(MenuItemGroup)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+
+// 全局组件挂载
+Vue.component('Pagination', Pagination)
 
 new Vue({
   render: h => h(App),

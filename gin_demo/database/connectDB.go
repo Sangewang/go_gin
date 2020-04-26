@@ -9,7 +9,7 @@ import (
 func GetDataBase() (db *sql.DB) {
 	dbDriver := "mysql"
 	dbUser := "root"
-	dbPass := "Baidu_1234"
+	dbPass := ""
 	dbName := "gin_demo"
 	db, err := sql.Open(dbDriver, dbUser + ":" + dbPass + "@/" + dbName)
 	if err != nil {

@@ -28,10 +28,19 @@
 								<i class="el-icon-setting"></i>
 								基础信息
 							</el-menu-item>
-							<el-menu-item index="2">
-								<i class="el-icon-s-promotion"></i>
-								系统工具
-							</el-menu-item>
+							<el-submenu  index="2">
+								<template slot="title">
+									<i class="el-icon-s-promotion"></i>
+									<span slot="title">系统工具</span>
+								</template>
+								<el-menu-item-group>
+									<el-submenu index="2-1">
+										<span slot="title">工具模板</span>
+										<el-menu-item index="2-1-1">模板创建</el-menu-item>
+										<el-menu-item index="2-1-2">模板操作</el-menu-item>
+									</el-submenu>
+								</el-menu-item-group>
+							</el-submenu >
 							<el-menu-item index="3">
 								<i class="el-icon-s-help"></i>
 								系统日历
@@ -44,8 +53,8 @@
 								<el-menu-item-group>
 									<el-submenu index="4-1">
 										<span slot="title">系统配置</span>
-										<el-menu-item index="4-1-1">表格操作</el-menu-item>
-										<el-menu-item index="4-1-2">图表展示</el-menu-item>
+										<el-menu-item index="4-1-1">任务创建</el-menu-item>
+										<el-menu-item index="4-1-2">图表操作</el-menu-item>
 									</el-submenu>
 								</el-menu-item-group>
 								<el-menu-item-group>
@@ -95,9 +104,13 @@ export default {
 				this.$router.push('/page1');
 				this.breadcrumbItems  = ['基础信息']
 				break;
-			case '2':
-				this.$router.push('/page2')
-				this.breadcrumbItems  = ['系统工具']
+			case '2-1-1':
+				this.$router.push('/sysdemocreate')
+				this.breadcrumbItems  = ['模板创建']
+				break;
+			case '2-1-2':
+				this.$router.push('/sysdemoperate')
+				this.breadcrumbItems  = ['模板操作']
 				break;
 			case '3':
 				this.$router.push('/calendar')
