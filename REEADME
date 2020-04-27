@@ -1,12 +1,18 @@
-1、由于国内go get是在是次，于是改用go mod
+一、Web通用的后端, 采用go_gin框架进行开发
+1、相关的包依赖使用go mod模式
 2、具体步骤
-	2.1、创建go_test文件夹
+	2.1、创建gin_demo文件夹
 	2.2、执行go mod init => 在gin_test下生成go.mod、go.sum
-	2.3、执行 go run server.go 运行代码会发现 go mod 会自动查找依赖自动下载
-	2.4、下载的依赖包存在pkg的mod下面
-3、export GO111MODULE=on
-4、上传git 方法
-git add README.md
-git commit -m "first commit"
-git remote add origin git@github.com:Sangewang/go_gin.git
-git push -u origin master
+	2.3、执行 go build 运行代码会发现 go mod 会自动查找依赖自动下载, 下载的依赖包存在pkg的mod下面
+	2.4、生成的二进制文件gin_demo会在gin_demo下面，直接运行即可启动web服务
+3、注意connectDB.go 文件中的数据库五元组要改成自己的配置，并执行conf/下面的db.conf 插入测试数据
+
+二、sanxiaozhi是采用vue + element_ui的方式开发的前段，目前留了比较通用的接口，只需要增加对应的后端接口即可
+VUE的相关知识可以参考：https://cn.vuejs.org/v2/guide/
+Element—UI相关知识参考：https://element.eleme.cn/#/zh-CN/component/installation
+
+三、杀掉进程
+ps -ef | grep gin_demo | grep -v grep | awk '{print $2}' | xargs kill -9
+
+四、下面是一些运行起来的截图
+
