@@ -14,7 +14,17 @@ type ResSysDictType struct {
 
 // 查询的结构体
 type SysDictType struct {
-	Did      int		`json:"dict_id" gorm:"auto-increment"`
+	Did      int		`gorm:"column:dict_id"`  
+	DictName string     
+	DictType string    
+	Status     string  
+	Remark	 string     
+	CreateTime string   
+}
+/*
+// 查询的结构体
+type SysDictType struct {
+	Did      int		`json:"dict_id"`
 	DictName string     `json:"dict_name"`
 	DictType string     `json:"dict_type"`
 	Status     string   `json:"status"`
@@ -22,3 +32,9 @@ type SysDictType struct {
 	CreateTime string   `json:"create_time"`
 }
 
+
+type Animal struct {
+    AnimalId    int64     `gorm:"column:beast_id"`         // 设置列名为`beast_id`
+    Birthday    time.Time `gorm:"column:day_of_the_beast"` // 设置列名为`day_of_the_beast`
+    Age         int64     `gorm:"column:age_of_the_beast"` // 设置列名为`age_of_the_beast`
+}*/

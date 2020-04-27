@@ -8,9 +8,12 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// http://gorm.book.jasperxu.com/models.html#md 
+
 var dbDriver = "mysql"
 var dbUser = "root"
-var dbPass = "Baidu_1234"
+// var dbPass = "Baidu_1234"
+var dbPass = ""
 var dbName = "gin_demo"
 var dbPort = 3306
 var dbHost = "127.0.0.1"

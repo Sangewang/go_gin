@@ -70,7 +70,11 @@ func GetSysDictTypeInfo(context *gin.Context) {
 		newdb = newdb.Where("status = ?", tmpStatus)
 	}
 	fmt.Println("newdb = ", newdb)
-	if err := newdb.Select("dict_id,dict_name,dict_type,status,remark,create_time").Find(&SysData).Error; err != nil {
+	/*
+	if err := newdb.Debug().Select("dict_id,dict_name,dict_type,status,remark,create_time").Find(&SysData).Error; err != nil {
+        fmt.Println(err.Error())
+	}*/
+	if err := newdb.Debug().Select("dict_id,dict_name,dict_type,status,remark,create_time").Find(&SysData).Error; err != nil {
         fmt.Println(err.Error())
 	}
 	dataLen := len(SysData)

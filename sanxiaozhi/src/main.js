@@ -8,12 +8,14 @@ import Pagination from './components/Pagination'
 import { Scrollbar, Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
  
 import { post, fetch, patch, put } from './api/http'
+import { resetForm } from './util/form'
 
-//定义全局变量
+//定义全局变量 => 全局方法挂载
 Vue.prototype.$post = post;
 Vue.prototype.$fetch = fetch;
 Vue.prototype.$patch = patch;
 Vue.prototype.$put = put;
+ Vue.prototype.resetForm = resetForm
  
 Vue.use(Scrollbar)
 Vue.use(Menu)

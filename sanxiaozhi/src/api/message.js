@@ -5,7 +5,6 @@
  * @returns {Promise}
  */
 export function showMsg (object, msg) {
-
 	object.$alert(msg, '提示信息', {
 		confirmButtonText: '确定',
 		/*

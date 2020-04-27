@@ -8,7 +8,7 @@
 				<el-input v-model="queryParams.dictType" placeholder="请输入字典类型" clearable size="small" style="width: 200px" @keyup.enter.native="handleQuery" />
 			</el-form-item>
 			<el-form-item label="字典状态 : " prop="status">
-				<el-select  v-model="queryParams.status" placeholder="字典状态" clearable size="small" style="width: 200px">
+				<el-select v-model="queryParams.status" placeholder="字典状态" clearable size="small" style="width: 200px">
 					<el-option v-for="item in statusOptions" :value="item.value" :key="item.label" name="sendValue">{{ item.value }}</el-option>
 				</el-select>
 			</el-form-item>
@@ -45,6 +45,24 @@
 		<!--
 		<el-pagination :page-size="10" :pager-count="2" layout="prev, pager, next" :total="2"></el-pagination>
 		-->
+		<!-- 添加或修改参数配置对话框 -->
+		<el-dialog :title="title" :visible.sync="open" width="500px">
+			<el-form ref="form" :model="form" :rules="rules" label-width="80px">
+				<el-form-item label="字典名称" prop="dictName"><el-input v-model="form.dictName" placeholder="请输入字典名称" /></el-form-item>
+				<el-form-item label="字典类型" prop="dictType"><el-input v-model="form.dictType" placeholder="请输入字典类型" /></el-form-item>
+				<el-form-item label="状态" prop="status">
+					<el-radio-group v-model="form.status">
+						<el-radio v-for="item in statusOptions" :key="item.value" :label="item.label">{{ item.value }}</el-radio>
+					</el-radio-group>
+				</el-form-item>
+				<el-form-item label="备注" prop="remark"><el-input v-model="form.remark" type="textarea" placeholder="请输入内容" /></el-form-item>
+			</el-form>
+
+			<div slot="footer" class="dialog-footer">
+				<el-button type="primary" @click="submitForm">确 定</el-button>
+				<el-button @click="cancel">取 消</el-button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -66,18 +84,25 @@ export default {
 			// 字典表格数据
 			typeList: [],
 			sendValue: '',
+			// 是否显示弹出层
+			open: false,
+			// 弹出层标题
+			title: '',
+			// 表单参数
+			form: {},
+			// 表单校验
+			rules: {
+				dictName: [{ required: true, message: '字典名称不能为空', trigger: 'blur' }],
+				dictType: [{ required: true, message: '字典类型不能为空', trigger: 'blur' }]
+			},
 			// 查询的条件
 			query_params: {
 				qdictName: 'All',
 				qdictType: 'All',
-				qstatus  : 'All'
+				qstatus: 'All'
 			},
 			// 状态数据字典
-			statusOptions: [
-				{ value: 'All', label: '-1' },
-				{ value: '正常', label: '0'  },
-				{ value: '异常', label: '1'  },
-			],
+			statusOptions: [{ value: 'All', label: '-1' }, { value: '正常', label: '0' }, { value: '异常', label: '1' }],
 			// 查询参数
 			queryParams: {
 				pageIndex: 1,
@@ -94,8 +119,13 @@ export default {
 	methods: {
 		// 把状态栏进行格式化
 		statusFormat(row) {
-			var status_dict = {'0': '正常', '1':'异常'}
-			return status_dict[row.status]
+			var status_dict = { '0': '正常', '1': '异常' };
+			return status_dict[row.status];
+		},
+		// 取消按钮
+		cancel() {
+			this.open = false;
+			this.reset();
 		},
 		/** 查询字典类型列表 */
 		getList() {
@@ -107,14 +137,12 @@ export default {
 				var tmpDataInfo = response.data;
 				var datalen = Object.keys(tmpDataInfo).length;
 				// 是不是可以取固定长度的呢
-				var start = this.queryParams.pageSize * (this.queryParams.pageIndex - 1)
-				var end   = start + 10
-				if (end > datalen)
-				{
-					end = datalen
+				var start = this.queryParams.pageSize * (this.queryParams.pageIndex - 1);
+				var end = start + 10;
+				if (end > datalen) {
+					end = datalen;
 				}
-				for (var key = start; key < end; key ++ )
-				{
+				for (var key = start; key < end; key++) {
 					var item = tmpDataInfo[key];
 					tmpDataArray.push(item);
 				}
@@ -128,9 +156,6 @@ export default {
 				this.loading = false;
 				this.typeList = tmpDataArray;
 			});
-
-
-
 		},
 		/** 搜索按钮操作 */
 		handleQuery() {
@@ -139,30 +164,88 @@ export default {
 			// showMsg(this, this.typeList);
 			// 根据条件进行过滤
 			// alert(this.queryParams.dictName)
-			this.query_params['qdictName'] = this.queryParams.dictName === '' ? 'All' : this.queryParams.dictName
-			this.query_params['qdictType'] = this.queryParams.dictType === '' ? 'All' : this.queryParams.dictType
-			this.query_params['qstatus'] = this.queryParams.status === '' ? 'All' : this.queryParams.status
+			this.query_params['qdictName'] = this.queryParams.dictName === '' ? 'All' : this.queryParams.dictName;
+			this.query_params['qdictType'] = this.queryParams.dictType === '' ? 'All' : this.queryParams.dictType;
+			this.query_params['qstatus'] = this.queryParams.status === '' ? 'All' : this.queryParams.status;
 			this.getList();
 		},
 		/** 重置按钮操作 */
 		resetQuery() {
 			this.dateRange = [];
-			showMsg(this, '重置功能未完成');
+			// this.resetForm('queryForm')
+			this.resetForm('queryForm');
+			this.handleQuery();
+			// showMsg(this, '重置功能未完成');
+		},
+		// 表单重置
+		reset() {
+			this.form = {
+				dictId: 'All',
+				dictName: 'All',
+				dictType: 'All',
+				status: '0',
+				remark: undefined
+			};
+			this.resetForm('form');
 		},
 		/** 新增按钮操作 */
 		handleAdd() {
-			showMsg(this, '新增功能未完成');
+			this.reset();
+			this.open = true;
+			this.title = '添加字典类型';
 		},
 		/** 修改按钮操作 */
-		handleUpdate() {
-			showMsg(this, '修改功能未完成');
+		handleUpdate(row) {
+			this.reset();
+			this.open = true;
+			this.title = '修改字典类型';
+			console.log(row);
+			// const dictId = row.dictId || this.ids;
+			/*
+			getType(dictId).then(response => {
+				this.form = response.data;
+				this.open = true;
+				this.title = '修改字典类型';
+			});*/
+			showMsg(this, '请求发送接口自己完善即可');
 		},
 		/** 删除按钮操作 */
-		handleDelete() {
-			showMsg(this, '删除功能未完成');
+		handleDelete(row) {
+			const dictIds = row.dictId || this.ids;
+			this.$confirm('是否确认删除字典编号为"' + dictIds + '"的数据项?', '警告', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				showMsg(this, '删除功能未完成');
+			});
 		},
+		/** 导出按钮操作 */
 		handleExport() {
-			showMsg(this, '导出功能未完成');
+			// const queryParams = this.queryParams
+			this.$confirm('是否确认导出所有类型数据项?', '警告', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				showMsg(this, '未完成');
+				/*
+				this.downloadLoading = true;
+				import('@/vendor/Export2Excel').then(excel => {
+					const tHeader = ['字典编号', '字典名称', '字典类型', '状态', '备注'];
+					const filterVal = ['dictId', 'dictName', 'dictType', 'status', 'remark'];
+					const list = this.typeList;
+					const data = formatJson(filterVal, list);
+					excel.export_json_to_excel({
+						header: tHeader,
+						data,
+						filename: '字典管理',
+						autoWidth: true, // Optional
+						bookType: 'xlsx' // Optional
+					});
+					this.downloadLoading = false;
+				});*/
+			});
 		},
 		// 多选框选中数据
 		handleSelectionChange(selection) {
@@ -170,6 +253,20 @@ export default {
 			this.single = selection.length !== 1;
 			this.multiple = !selection.length;
 			// showMsg(this, this.ids);
+		},
+		/** 提交按钮 */
+		submitForm: function() {
+			this.$refs['form'].validate(valid => {
+				if (valid) {
+					if (this.form.dictId !== undefined) {
+						showMsg(this, '请求发送接口自己完善即可');
+						console.log(this.form);
+					} else {
+						showMsg(this, this.form.dictId + ' => 异常');
+						console.log(this.form);
+					}
+				}
+			});
 		}
 	}
 };
