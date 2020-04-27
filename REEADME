@@ -15,4 +15,14 @@ Element—UI相关知识参考：https://element.eleme.cn/#/zh-CN/component/inst
 ps -ef | grep gin_demo | grep -v grep | awk '{print $2}' | xargs kill -9
 
 四、下面是一些运行起来的截图
+4.1 后端运行截图
+https://github.com/Sangewang/go_gin/blob/master/pic/go_gin.jpg
 
+4.2 VUE前端
+https://github.com/Sangewang/go_gin/blob/master/pic/vue-ui.png
+
+4.3 主要界面展示1
+https://github.com/Sangewang/go_gin/blob/master/pic/show1.png
+
+4.4 主要界面展示2
+https://github.com/Sangewang/go_gin/blob/master/pic/show2.png
