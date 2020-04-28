@@ -82,21 +82,21 @@ cd gin_demo
 ps -ef | grep gin_demo | grep -v grep | awk '{print $2}' | xargs kill -9
 ```
 
-## Preview 效果图
+## 👍 Preview 效果图
 
-#### 登录界面
+#### 👉 登录界面
 ![登录界面](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/login.png)
 
-####  后端运行截图
+#### 👉 后端运行截图
 ![后端运行截图](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/go_gin.jpg)
 
-####  VUE前端
+#### 👉 VUE前端
 ![前端](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/vue-ui.png)
 
-####  主要界面展示1
+#### 👉 主要界面展示1
 ![主要界面展示1](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show1.png)
 
-####  主要界面展示2
+#### 👉 主要界面展示2
 ![主要界面展示2](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show2.png)
 
 
