@@ -99,6 +99,33 @@ ps -ef | grep gin_demo | grep -v grep | awk '{print $2}' | xargs kill -9
 #### 👉 主要界面展示2
 ![主要界面展示2](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show2.png)
 
-
+## gin_demo 目录结构
+```shell
+├── static
+│   └── file						// 暂无使用
+├── template						// 页面模板
+│   ├── fileUpload.html				// 文件上传的页面demo
+│   ├── vueDemo.html				// vue的页面demo
+│   └── insertUser.html             // 插入数据的页面demo
+├── node_modules					// axios 前后端通信
+├── package-lock.json				// 包锁
+├── controller						// 控制器 具体业务逻辑处理
+│   ├── FileController.go			// 文件处理控制器
+│   ├── VueShowDeom.go				// vue Demo 无用
+│   ├── UserController.go			// 用户信息注册、查询的控制器
+│   └── SystemController.go			// 系统信息处理控制器
+├── go.mod							// go mod 模块
+├── go.sum							// go的安装信息
+├── main.go							// 主函数 路由信息规划
+├── model							// 数据模块
+│   ├── commonResponse.go			// 返回信息结构体
+│   ├── user.go						// 用户信息结构体
+│   └── sys.go						// 系统信息结构体
+├── config							// 系统配置
+│   └── db.conf						// 数据库配置创建、插入
+├── database						// 数据库
+    └── connectDB.go				// 数据库连接
+```
+## 
 ## License
 Copyright (c) 2020 linwang
