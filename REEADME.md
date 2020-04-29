@@ -1,9 +1,9 @@
 # gin_demo(后端框架) & sanxiaozhi（前端框架）
 
 ## 🎁 简介
-[gin_demo] 是一个用gin框架搭建的后端项目
-[sanxiaozhi] 是一个使用element_ui + vue搭建的前端框架
-前后端分离的方式使得整个系统更加灵活，可移植性、可扩展性更好
+### => [gin_demo] 是一个用gin框架搭建的后端项目
+### => [sanxiaozhi] 是一个使用element_ui + vue搭建的前端框架
+### => 前后端分离的方式使得整个系统更加灵活，可移植性、可扩展性更好
 
 
 ## ✨ 功能
