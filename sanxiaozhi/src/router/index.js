@@ -9,6 +9,9 @@ import calendar from '../components/calendar'
 import table from '../components/table'
 import chart from '../components/chart'
 import Full from '../components/containers/Full'
+import map from '../components/map/map'
+import introduction from '../components/map/introduction'
+import upload from '../components/map/upload'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -63,6 +66,23 @@ export default new Router({
 					path: '/chart',
 					name: 'chart',
 					component: chart
+				}
+			]
+		},
+		{
+			path: '/map',
+			name: 'map',
+			component: map,
+			redirect: "/map/introduction", //重定向，第一次进入就进入login，不添加的话第一次进入右侧是空白
+			children: [{
+					path: '/map/introduction',
+					name: 'introduction',
+					component: introduction
+				},
+				{
+						path: '/map/upload',
+						name: 'upload',
+						component: upload
 				}
 			]
 		}

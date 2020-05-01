@@ -1,7 +1,7 @@
 <template>
 	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 		<el-menu-item index="1"> <router-link tag="div" to='/page1'>定位分析平台</router-link></el-menu-item>
-		<el-menu-item index="5"> <router-link tag="div" to='/'>地图分析平台</router-link></el-menu-item>
+		<el-menu-item index="5"> <router-link tag="div" to='/map'>地图分析平台</router-link></el-menu-item>
 		<el-menu-item index="3" disabled>消息中心</el-menu-item>
 		<el-menu-item index="4"><a href="https://www.baidu.com" target="_blank">百度知道</a></el-menu-item>
 		<el-submenu index="2">
