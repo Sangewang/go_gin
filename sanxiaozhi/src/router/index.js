@@ -8,6 +8,7 @@ import sysdemocreate from '../components/sysdemocreate'
 import calendar from '../components/calendar'
 import table from '../components/table'
 import chart from '../components/chart'
+import Full from '../components/containers/Full'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -26,6 +27,7 @@ export default new Router({
 		{ path: "/calendar", name: "calendar", component: calendar },
 		{ path: "/table", name: "table", component: table },
 		{ path: "/chart", name: "chart", component: chart },*/
+		{ path: "/dashboard", name: "dashboard", component: Full,  redirect: "/page1"},
 		{ path: "/login", name: "login", component: login },
 		{ 
 			path: '/',

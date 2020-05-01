@@ -48,7 +48,7 @@
 							// 登录成功后初始化数据
 							Vue.prototype.$dataInfo = successResponse.data.data;
 							// 登陆成功后进行页面跳转
-                            this.$router.replace({path: '/page1'})
+                            this.$router.replace({path: '/dashboard'})
                         } else {
 							alert(successResponse.data.msg)
 						}
