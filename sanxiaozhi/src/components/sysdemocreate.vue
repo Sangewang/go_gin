@@ -131,7 +131,7 @@ export default {
 		getList() {
 			// 当前的查询效率一般，应该去分页查询，直接查询某一页的数据
 			var tmpDataArray = [];
-			showMsg(this, this.query_params);
+			// showMsg(this, this.query_params);
 			this.$post('/system/dict', this.query_params).then(response => {
 				console.log(response);
 				var tmpDataInfo = response.data;

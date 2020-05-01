@@ -2,7 +2,7 @@
 	<body id="poster">
 		<el-form class="login-container" label-position="left" label-width="0px">
 			<h3 class="login_title">系统登录</h3>
-
+ 
 			<el-form-item ><el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="账号"></el-input></el-form-item>
 
 			<el-form-item><el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码"></el-input></el-form-item>
@@ -85,7 +85,8 @@ body {
 	color: #505458;
 }
 
+/*
 .el-input__inner {
 	width: 40%;
-}
+}*/
 </style>

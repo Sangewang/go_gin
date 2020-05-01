@@ -1,6 +1,6 @@
 <template>
   <div>
-    虚拟现实，啥也不是
+    虚拟现实，未来世界
   </div>
 </template>
 <script type="text/ecmascript-6">
