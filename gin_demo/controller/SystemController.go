@@ -109,7 +109,7 @@ func GetSysDictTypeInfo(context *gin.Context) {
 		}
 	}
 
-	if flag != false {
+	if flag == false {
 		context.JSON(200, gin.H{
 			"code" : -1,
 			"msg"  : "验证失败",

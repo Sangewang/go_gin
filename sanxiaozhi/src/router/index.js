@@ -12,6 +12,7 @@ import Full from '../components/containers/Full'
 import map from '../components/map/map'
 import introduction from '../components/map/introduction'
 import upload from '../components/map/upload'
+import picshow from '../components/map/picshow'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -80,9 +81,14 @@ export default new Router({
 					component: introduction
 				},
 				{
-						path: '/map/upload',
-						name: 'upload',
-						component: upload
+					path: '/map/upload',
+					name: 'upload',
+					component: upload
+				},
+				{
+					path: '/map/picshow',
+					name: 'picshow',
+					component: picshow
 				}
 			]
 		}

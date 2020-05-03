@@ -43,6 +43,15 @@ func main() {
 		// 可以添加其它的路由请求
 	}
 
+	// 路由组 pic => 主要负责图片处理
+	picd := router.Group("/pic")
+	{	// 请求参数在请求路由上
+		picd.POST("/upload", controller.PicUploadHandle)
+		
+		// 可以添加其它的路由请求
+		picd.GET("/download", controller.PicDownloadHandle)
+	}
+
 	file := router.Group("/file")
 	{
 		// 跳转到文件上传界面

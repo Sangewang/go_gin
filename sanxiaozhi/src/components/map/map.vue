@@ -57,9 +57,9 @@
 								</template>
 								<el-menu-item-group>
 									<el-submenu index="7-1">
-										<span slot="title">备用1</span>
-										<el-menu-item index="7-1-1">备用1-1</el-menu-item>
-										<el-menu-item index="7-1-2">备用1-2</el-menu-item>
+										<span class="el-icon-picture" slot="title">图片展示</span>
+										<el-menu-item index="7-1-1">图片列表</el-menu-item>
+										<el-menu-item index="7-1-2">备用</el-menu-item>
 									</el-submenu>
 								</el-menu-item-group>
 								<el-menu-item-group>
@@ -118,6 +118,10 @@ export default {
 				this.$router.push('/map/upload');
 				this.breadcrumbItems  = '数据上传'
 				break;
+			case '7-1-1':
+				this.$router.push('/map/picshow');
+				this.breadcrumbItems  = '图片列表'
+				break;			
       }
     },
 
