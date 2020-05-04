@@ -101,6 +101,8 @@ git rm -r --cached filepath
 #### 👉 主要界面展示2
 ![主要界面展示2](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show2.png)
 
+![test](https://img-blog.csdnimg.cn/20200504212826747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
+
 ## gin_demo 目录结构
 ```shell
 ├── template					// 页面模板
