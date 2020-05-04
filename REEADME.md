@@ -87,21 +87,25 @@ git rm -r --cached filepath
 ## 👍 Preview 效果图
 
 #### 👉 登录界面
-![登录界面](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/login.png)
+![登录界面](https://img-blog.csdnimg.cn/20200504213706535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
 #### 👉 后端运行截图
-![后端运行截图](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/go_gin.jpg)
+![后端运行截图](https://img-blog.csdnimg.cn/20200504214621343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
-#### 👉 VUE前端
-![前端](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/vue-ui.png)
+#### 👉 VUE前端 主要包括 定位分析平台、地图分析平台、百度知道、我的工作台(github、csdn等)
+![前端](https://img-blog.csdnimg.cn/20200504213736599.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
-#### 👉 主要界面展示1
-![主要界面展示1](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show1.png)
+#### 👉 地图分析平台
+![地图分析平台](https://img-blog.csdnimg.cn/20200504213803362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
-#### 👉 主要界面展示2
-![主要界面展示2](https://raw.githubusercontent.com/Sangewang/go_gin/master/pic/show2.png)
+#### 👉 定位分析平台
+![定位分析平台](https://img-blog.csdnimg.cn/20200504213824709.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
-![test](https://img-blog.csdnimg.cn/20200504212826747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
+#### 👉 百度地图
+![百度地图](https://img-blog.csdnimg.cn/20200504213902764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
+
+#### 👉 高德地图
+![高德地图](https://img-blog.csdnimg.cn/2020050421391623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
 ## gin_demo 目录结构
 ```shell
