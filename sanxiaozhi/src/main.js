@@ -4,6 +4,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/index.js'
 import Pagination from './components/Pagination'
+import VCharts from 'v-charts'
 
 import { Scrollbar, Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
  
@@ -15,13 +16,14 @@ Vue.prototype.$post = post;
 Vue.prototype.$fetch = fetch;
 Vue.prototype.$patch = patch;
 Vue.prototype.$put = put;
- Vue.prototype.resetForm = resetForm
- 
+Vue.prototype.resetForm = resetForm
+
 Vue.use(Scrollbar)
 Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(VCharts)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

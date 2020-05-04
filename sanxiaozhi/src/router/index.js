@@ -13,6 +13,10 @@ import map from '../components/map/map'
 import introduction from '../components/map/introduction'
 import upload from '../components/map/upload'
 import picshow from '../components/map/picshow'
+import result from '../components/map/result'
+import bdmap from '../components/map/bdmap'
+import gdmap from '../components/map/gdmap'
+
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -89,6 +93,21 @@ export default new Router({
 					path: '/map/picshow',
 					name: 'picshow',
 					component: picshow
+				},
+				{
+					path: '/map/result',
+					name: 'result',
+					component: result
+				},
+				{
+					path: '/map/bdmap',
+					name: 'bdmap',
+					component: bdmap
+				},
+				{
+					path: '/map/gdmap',
+					name: 'gdmap',
+					component: gdmap
 				}
 			]
 		}

@@ -57,16 +57,16 @@
 								</template>
 								<el-menu-item-group>
 									<el-submenu index="7-1">
-										<span class="el-icon-picture" slot="title">图片展示</span>
+										<span class="el-icon-picture" slot="title">图片</span>
 										<el-menu-item index="7-1-1">图片列表</el-menu-item>
 										<el-menu-item index="7-1-2">备用</el-menu-item>
 									</el-submenu>
 								</el-menu-item-group>
 								<el-menu-item-group>
 									<el-submenu index="7-2">
-										<span slot="title">备用2</span>
-										<el-menu-item index="7-2-1">备用2-1</el-menu-item>
-										<el-menu-item index="7-2-2">备用2-2</el-menu-item>
+										<span class="el-icon-map-location" slot="title">地图</span>
+										<el-menu-item index="7-2-1">百度地图</el-menu-item>
+										<el-menu-item index="7-2-2">高德地图</el-menu-item>
 									</el-submenu>
 								</el-menu-item-group>
 							</el-submenu>
@@ -76,7 +76,7 @@
 				<el-col :xs="20" :sm="20" :md="20" :lg="20">
 					<div style="border: 1px; padding:5px; margin:2px; background-color: antiquewhite">
 						<el-breadcrumb separator="/">
-							<el-breadcrumb-item :to="{ path: '/map' }">首页</el-breadcrumb-item>
+							<el-breadcrumb-item :to="{ path: '/map/introduction' }">首页</el-breadcrumb-item>
 							<el-breadcrumb-item>{{ breadcrumbItems }}</el-breadcrumb-item>
 						</el-breadcrumb>
 					</div>
@@ -109,7 +109,7 @@ export default {
 
     handleSelect(key, keyPath){
 		console.log(keyPath);
-		switch(key){
+		switch(key) {
 			case '1':
 				this.$router.push('/map/introduction');
 				this.breadcrumbItems  = '系统简介'
@@ -118,11 +118,23 @@ export default {
 				this.$router.push('/map/upload');
 				this.breadcrumbItems  = '数据上传'
 				break;
+			case '6':
+				this.$router.push('/map/result');
+				this.breadcrumbItems  = '评测结果'
+				break;
 			case '7-1-1':
 				this.$router.push('/map/picshow');
 				this.breadcrumbItems  = '图片列表'
-				break;			
-      }
+				break;
+			case '7-2-1':
+				this.$router.push('/map/bdmap');
+				this.breadcrumbItems  = '百度地图'
+				break;	
+			case '7-2-2':
+				this.$router.push('/map/gdmap');
+				this.breadcrumbItems  = '高德地图'
+				break;	
+        }
     },
 
   },

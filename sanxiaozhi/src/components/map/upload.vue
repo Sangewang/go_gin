@@ -20,6 +20,7 @@
 			:on-preview="handlePreview"
 			:on-remove="handleRemove"
 			:file-list="fileList"
+			:on-change="handleAddFile"
 			:auto-upload="false"
 			:multiple="true"
 			list-type="picture"
@@ -30,11 +31,11 @@
 			<div style="margin: 20px;"></div>
 			<div slot="tip" class="el-upload__tip">文件列表:</div>
 		</el-upload>
-		
 	</div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 	data() {
 		return {
@@ -45,12 +46,29 @@ export default {
 				type: ''
 			},
 			fileList: [],
+			sendfileList: [] // 发请求的文件列表
 		};
 	},
 	methods: {
 		submitUpload() {
-			this.$refs.upload.submit();
+			// this.$refs.upload.submit();
+			console.log(this.sendfileList);
 			// 文件上传的接口 去go的file模块进行controller的处理
+			axios
+				.post('http://127.0.0.1:9090/file/upload', {
+					filelist: this.sendfileList
+				})
+				.then(successResponse => {
+					console.log(successResponse);
+					if (successResponse.data.code === 0) {
+						alert(successResponse.data);
+					} else {
+						alert(successResponse.data.msg);
+					}
+				})
+				.catch(failResponse => {
+					alert(failResponse);
+				});
 		},
 		handleRemove(file, fileList) {
 			console.log(file, fileList);
@@ -60,6 +78,10 @@ export default {
 		},
 		clearFiles() {
 			this.fileList = [];
+			this.sendfileList = [];
+		},
+		handleAddFile(file, fileList) {
+			this.sendfileList = fileList;
 		}
 	}
 };
@@ -76,7 +98,4 @@ export default {
 	color: #606266;
 	margin-top: 7px;
 }
-
-
-
 </style>

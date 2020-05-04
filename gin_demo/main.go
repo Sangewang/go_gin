@@ -60,7 +60,8 @@ func main() {
 		file.POST("/singleUpload", controller.FormUpload)
 		file.POST("/multiUpload", controller.MultiUpload)
 		// base64上传图片
-		// file.POST("/upload", controller.Base64Upload)
+		// file.POST("/upload", controller.UploadHandler)
+		file.POST("/upload", controller.HandleUploadFile)
 	}
 
 	vue := router.Group("/vue")

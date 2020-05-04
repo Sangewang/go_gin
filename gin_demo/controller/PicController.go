@@ -17,16 +17,6 @@ type TPic model.PicSys
 
 type PicList []TPic
 
-/*
-var gormdb *gorm.DB
-// 初始化函数先执行
-func init () {
-	log.Println(">>>> Get Pic Database Connection start <<<<")
-	gormdb = database.GetSysTableDb()
-	gormdb.SingularTable(true)
-	gormdb.LogMode(true)
-}
-*/
 
 var ret TPic // 用一个全局变量获取Pic
 func (u TPic) ReflectCallFuncNoArgs() {
