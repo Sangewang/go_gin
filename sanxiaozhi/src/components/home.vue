@@ -121,7 +121,8 @@ export default {
 		console.log(keyPath);
 		switch(key){
 			case '1':
-				this.$router.push('/page1');
+				// this.$router.push('/page1');
+				this.$router.push('/monitor');
 				this.breadcrumbItems  = '基础信息'
 				break;
 			case '2-1-1':

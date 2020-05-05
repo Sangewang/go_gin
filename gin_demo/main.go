@@ -52,6 +52,7 @@ func main() {
 		picd.GET("/download", controller.PicDownloadHandle)
 	}
 
+	// 路由组 file => 文件上传、下载处理
 	file := router.Group("/file")
 	{
 		// 跳转到文件上传界面
@@ -62,6 +63,13 @@ func main() {
 		// base64上传图片
 		// file.POST("/upload", controller.UploadHandler)
 		file.POST("/upload", controller.HandleUploadFile)
+	}
+
+	// 路由组 monitor => 监控
+	monitor := router.Group("monitor")
+	{
+		// 本地机器的监控
+		monitor.POST("/local", controller.MonitorLocal)
 	}
 
 	vue := router.Group("/vue")

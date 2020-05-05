@@ -16,6 +16,7 @@ import picshow from '../components/map/picshow'
 import result from '../components/map/result'
 import bdmap from '../components/map/bdmap'
 import gdmap from '../components/map/gdmap'
+import monitor from '../components/monitor/localserver'
 
 
 const routerPush = Router.prototype.push
@@ -46,6 +47,10 @@ export default new Router({
 					path: '/page1',
 					name: 'page1',
 					component: page1
+				}, {
+					path: '/monitor',
+					name: 'monitor',
+					component: monitor
 				},
 				{
 					path: '/sysdemocreate',
