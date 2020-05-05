@@ -1,18 +1,22 @@
 package model
 
-type OsSys struct {
-	Arch string `json: "arch"`  // 服务器架构
-	Operate string `json: "operate"`  // 操作系统
+type HostSys struct {
+	Hostname    string `json:"hostname"`	// 服务器名称
+    Uptime      uint64 `json:"uptime"`		// 系统运行时间
+	BootTime    string `json:"bootTime"`	// 系统启动事件
+	KernelArch  string `json:"kernelArch"`	// 服务器架构
 }
 
 type CpuSys struct {
-	Cpunum int `json: "cpunum"` // cpu数量
+	CpuName string `json: "modelname"` // cpu名称
+	CpuCores int32 `json: "cpucores"` // 内核数量
+	CpuUsage float64 `json: "cpuusage"` // cpu使用率
 }
 
 type MemSys struct {
-	MemTotal float32 `json: "total"`  // 总内存
-	MemUsed float32 `json: "used"`   // 已使用内存
-	MemUsage float32 `json: "usage"`
+	MemTotal uint64 `json: "total"`  // 总内存
+	MemUsed uint64 `json: "used"`   // 已使用内存
+	MemUsage float64 `json: "memusage"`
 }
 
 type GoSys struct {
@@ -21,13 +25,15 @@ type GoSys struct {
 }
 
 type DiskSys struct {
-	DiskTotal int `json: "total"`
-	DiskFree int `json "free"`
+	DiskPath string `json: "diskpath"`
+	DiskTotal uint64 `json: "total"`
+	DiskUsed uint64 `json "used"`
+	DiskUsage float64 `json "diskusage"`
 }
 
 type MonitorSys struct {
 	Name string `json: "name"`
-	OsSys
+	HostSys
 	CpuSys
 	MemSys
 	GoSys

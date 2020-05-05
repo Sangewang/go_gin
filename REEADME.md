@@ -131,7 +131,7 @@ git rm -r --cached filepath
 ![高德地图](https://img-blog.csdnimg.cn/2020050421391623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
 #### 👉 定位分析平台 => 系统监控
-![系统监控](https://img-blog.csdnimg.cn/20200505124940371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
+![系统监控](https://img-blog.csdnimg.cn/20200505211120481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE1NTkyMzY=,size_16,color_FFFFFF,t_70)
 
 ## gin_demo 目录结构
 ```shell

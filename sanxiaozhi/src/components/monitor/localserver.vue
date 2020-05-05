@@ -14,21 +14,27 @@
 							</thead>
 							<tbody>
 								<tr>
+									<td><div class="cell">服务器名字</div></td>
+									<td>
+										<div v-if="server.hostname" class="cell">{{ server.hostname }}</div>
+									</td>
+								</tr>
+								<tr>
 									<td><div class="cell">服务器架构</div></td>
 									<td>
-										<div v-if="server.Arch" class="cell">{{ server.Arch }}</div>
+										<div v-if="server.kernelArch" class="cell">{{ server.kernelArch }}</div>
 									</td>
 								</tr>
 								<tr>
-									<td><div class="cell">操作系统</div></td>
+									<td><div class="cell">启动时间</div></td>
 									<td>
-										<div v-if="server.Operate" class="cell">{{ server.Operate }}</div>
+										<div v-if="server.bootTime" class="cell">{{ server.bootTime }}</div>
 									</td>
 								</tr>
 								<tr>
-									<td><div class="cell">核心数</div></td>
+									<td><div class="cell">运行时间</div></td>
 									<td>
-										<div v-if="server.Cpunum" class="cell">{{ server.Cpunum }}</div>
+										<div v-if="server.uptime" class="cell">{{ server.uptime }}天</div>
 									</td>
 								</tr>
 							</tbody>
@@ -36,7 +42,47 @@
 					</div>
 				</el-card>
 			</el-col>
-
+<el-col :span="12" class="card-box">
+				<el-card>
+					<div slot="header"><span>磁盘状态</span></div>
+					<div class="el-table el-table--enable-row-hover el-table--medium">
+						<table cellspacing="0" style="width: 100%;">
+							<thead>
+								<tr>
+									<th class="is-leaf"><div class="cell">属性</div></th>
+									<th class="is-leaf"><div class="cell">值</div></th>
+								</tr>
+							</thead>
+							<tbody v-if="server.DiskTotal">
+								<tr>
+									<td><div class="cell">路径</div></td>
+									<td>
+										<div class="cell">{{ server.DiskPath }}</div>
+									</td>
+								</tr>
+								<tr>
+									<td><div class="cell">总共</div></td>
+									<td>
+										<div class="cell">{{ server.DiskTotal }}G</div>
+									</td>
+								</tr>
+								<tr>
+									<td><div class="cell">已用</div></td>
+									<td>
+										<div class="cell">{{ server.DiskUsed }}G</div>
+									</td>
+								</tr>
+								<tr>
+									<td><div class="cell">使用率</div></td>
+									<td>
+										<div class="cell">{{ server.DiskUsage }}%</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</el-card>
+			</el-col>
 			<el-col :span="12" class="card-box">
 				<el-card>
 					<div slot="header"><span>内存</span></div>
@@ -75,7 +121,7 @@
 
 			<el-col :span="12" class="card-box">
 				<el-card>
-					<div slot="header"><span>go运行环境</span></div>
+					<div slot="header"><span>CPU</span></div>
 					<div class="el-table el-table--enable-row-hover el-table--medium">
 						<table cellspacing="0" style="width: 100%;">
 							<thead>
@@ -86,15 +132,21 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><div class="cell">go version</div></td>
+									<td><div class="cell">名字</div></td>
 									<td>
-										<div v-if="server.GoVersion" class="cell">{{ server.GoVersion }}</div>
+										<div v-if="server.CpuName" class="cell">{{ server.CpuName }}</div>
 									</td>
 								</tr>
 								<tr>
-									<td><div class="cell">Goroutine</div></td>
+									<td><div class="cell">数量</div></td>
 									<td>
-										<div v-if="server.NumGoroutine" class="cell">{{ server.NumGoroutine }}</div>
+										<div v-if="server.CpuCores" class="cell">{{ server.CpuCores }}</div>
+									</td>
+								</tr>
+								<tr>
+									<td><div class="cell">使用率</div></td>
+									<td>
+										<div v-if="server.CpuUsage" class="cell">{{ server.CpuUsage }}%</div>
 									</td>
 								</tr>
 							</tbody>
@@ -103,35 +155,7 @@
 				</el-card>
 			</el-col>
 
-			<el-col :span="12" class="card-box">
-				<el-card>
-					<div slot="header"><span>磁盘状态</span></div>
-					<div class="el-table el-table--enable-row-hover el-table--medium">
-						<table cellspacing="0" style="width: 100%;">
-							<thead>
-								<tr>
-									<th class="is-leaf"><div class="cell">属性</div></th>
-									<th class="is-leaf"><div class="cell">值</div></th>
-								</tr>
-							</thead>
-							<tbody v-if="server.DiskTotal">
-								<tr>
-									<td><div class="cell">总共</div></td>
-									<td>
-										<div class="cell">{{ server.DiskTotal }}</div>
-									</td>
-								</tr>
-								<tr>
-									<td><div class="cell">可用</div></td>
-									<td>
-										<div class="cell">{{ server.DiskFree }}</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</el-card>
-			</el-col>
+			
 		</el-row>
 	</div>
 </template>
