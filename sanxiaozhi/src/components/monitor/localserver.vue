@@ -42,7 +42,7 @@
 					</div>
 				</el-card>
 			</el-col>
-<el-col :span="12" class="card-box">
+			<el-col :span="12" class="card-box">
 				<el-card>
 					<div slot="header"><span>磁盘状态</span></div>
 					<div class="el-table el-table--enable-row-hover el-table--medium">
@@ -154,8 +154,6 @@
 					</div>
 				</el-card>
 			</el-col>
-
-			
 		</el-row>
 	</div>
 </template>
@@ -188,7 +186,7 @@ export default {
 			});
 		}, */
 		getList() {
-			getNServer(this.url, "").then(response => {
+			getNServer(this.url, '').then(response => {
 				console.log(response);
 				this.server = response.old_data;
 				this.loading.close();

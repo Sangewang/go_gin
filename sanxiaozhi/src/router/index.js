@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '../components/home'
-import login from '../components/login'
-import page1 from '../components/page1'
+import login from '../view/login/login'
+//import dashboard from '../components/dashboard'
 import sysdemoperate from '../components/sysdemoperate'
 import sysdemocreate from '../components/sysdemocreate'
 import calendar from '../components/calendar'
@@ -36,18 +36,21 @@ export default new Router({
 		{ path: "/calendar", name: "calendar", component: calendar },
 		{ path: "/table", name: "table", component: table },
 		{ path: "/chart", name: "chart", component: chart },*/
-		{ path: "/dashboard", name: "dashboard", component: Full,  redirect: "/page1"},
+		{ path: "/dashboard", name: "dashboard", component: Full},
 		{ path: "/login", name: "login", component: login },
 		{ 
 			path: '/',
 			name: 'home',
 			component: home,
 			redirect: "/login", //重定向，第一次进入就进入login，不添加的话第一次进入右侧是空白
-			children: [{
-					path: '/page1',
-					name: 'page1',
-					component: page1
-				}, {
+			children: [
+				/*
+				{
+					path: '/dashboard',
+					name: 'dashboard',
+					component: dashboard
+				},*/
+				{
 					path: '/monitor',
 					name: 'monitor',
 					component: monitor

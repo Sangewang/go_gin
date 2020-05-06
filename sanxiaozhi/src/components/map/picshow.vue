@@ -46,7 +46,7 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			labelPosition: 'right',
+			labelPosition: 'left',
 			formLabelAlign: {
 				name: '',
 				region: '',
