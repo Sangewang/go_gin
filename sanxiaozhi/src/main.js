@@ -16,7 +16,7 @@ Vue.prototype.$post = post;
 Vue.prototype.$fetch = fetch;
 Vue.prototype.$patch = patch;
 Vue.prototype.$put = put;
-Vue.prototype.resetForm = resetForm
+Vue.prototype.resetForm = resetForm;
 
 Vue.use(Scrollbar)
 Vue.use(Menu)
