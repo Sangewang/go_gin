@@ -24,9 +24,10 @@
 			<el-col :span="1.5"><el-button type="success" icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate">修改</el-button></el-col>
 			<el-col :span="1.5"><el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete">删除</el-button></el-col>
 			<el-col :span="1.5"><el-button type="warning" icon="el-icon-download" size="mini" @click="handleExport">导出</el-button></el-col>
+			<el-col :span="1.5"><el-button type="warning" icon="el-icon-check" size="mini" @click="clickAll">全选/反选</el-button></el-col>
 		</el-row>
 
-		<el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
+		<el-table ref="multipleTable" v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" align="center" />
 			<el-table-column label="字典编号" width="80" align="center" prop="dictId" />
 			<el-table-column label="字典名称" align="center" prop="dictName" :show-overflow-tooltip="true" />
@@ -67,7 +68,8 @@
 </template>
 
 <script>
-import { showMsg } from '../api/message.js';
+import { showMsg } from '../api/message';
+import { formatJson } from '../util/converjson';
 export default {
 	name: 'Dict',
 	data() {
@@ -81,8 +83,12 @@ export default {
 			multiple: true,
 			// 总条数
 			total: 0,
+			// 全选、反选
+			checkAll: false,
 			// 字典表格数据
 			typeList: [],
+			// 全部数据为了全选等功能使用
+			alltypeList: [],
 			sendValue: '',
 			// 是否显示弹出层
 			open: false,
@@ -131,9 +137,10 @@ export default {
 		getList() {
 			// 当前的查询效率一般，应该去分页查询，直接查询某一页的数据
 			var tmpDataArray = [];
+			var alltmpDataArray = [];
 			// showMsg(this, this.query_params);
 			this.$post('/system/dict', this.query_params).then(response => {
-				console.log(response);
+				// console.log(response);
 				var tmpDataInfo = response.data;
 				var datalen = Object.keys(tmpDataInfo).length;
 				// 是不是可以取固定长度的呢
@@ -142,19 +149,21 @@ export default {
 				if (end > datalen) {
 					end = datalen;
 				}
+				// 只取固定某一页的数据
 				for (var key = start; key < end; key++) {
 					var item = tmpDataInfo[key];
 					tmpDataArray.push(item);
 				}
-				/*
-				for (var key in tmpDataInfo) {
-					var item = tmpDataInfo[key];
-					tmpDataArray.push(item);
-				}*/
-				console.log(tmpDataArray);
+
+				for (var allkey in tmpDataInfo) {
+					var allitem = tmpDataInfo[allkey];
+					alltmpDataArray.push(allitem);
+				}
+				// console.log(tmpDataArray);
 				this.total = datalen;
 				this.loading = false;
 				this.typeList = tmpDataArray;
+				this.alltypeList = alltmpDataArray;
 			});
 		},
 		/** 搜索按钮操作 */
@@ -220,22 +229,45 @@ export default {
 				showMsg(this, '删除功能未完成');
 			});
 		},
-		/** 导出按钮操作 */
+		/** 导出按钮操作  row*/
 		handleExport() {
-			// const queryParams = this.queryParams
+			var tmpDataList = [];
+			if (this.checkAll == true) {
+				// 这个就是全选了
+				tmpDataList = this.alltypeList;	
+			} else {
+				// 选择当前页的某一部分 => this.typeList
+				/*
+				alert(this.ids);
+				var dictIds = new String(row.dictId || this.ids);
+				alert(dictIds);
+				var idArr = dictIds.split(',');
+				var idLength = idArr.length;
+				//var sum = 0;
+				console.log("alltypeList = ", this.alltypeList);
+				for (var i = 0; i < idLength; i++) {
+					// alert(idArr[i]);
+					tmpDataList.push(this.alltypeList[idArr[i]])
+				}
+				//alert(sum);*/
+				tmpDataList = this.typeList;
+			}
+			// console.log("tmpDataList = ", tmpDataList);
+
 			this.$confirm('是否确认导出所有类型数据项?', '警告', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
 			}).then(() => {
-				showMsg(this, '未完成');
-				/*
 				this.downloadLoading = true;
-				import('@/vendor/Export2Excel').then(excel => {
+				import('../export/Export2Excel').then(excel => {
 					const tHeader = ['字典编号', '字典名称', '字典类型', '状态', '备注'];
 					const filterVal = ['dictId', 'dictName', 'dictType', 'status', 'remark'];
-					const list = this.typeList;
+					const list = tmpDataList;
+					// console.log("list = ", list);
+
 					const data = formatJson(filterVal, list);
+					// console.log("data = ", data);
 					excel.export_json_to_excel({
 						header: tHeader,
 						data,
@@ -244,7 +276,7 @@ export default {
 						bookType: 'xlsx' // Optional
 					});
 					this.downloadLoading = false;
-				});*/
+				});
 			});
 		},
 		// 多选框选中数据
@@ -253,6 +285,18 @@ export default {
 			this.single = selection.length !== 1;
 			this.multiple = !selection.length;
 			// showMsg(this, this.ids);
+		},
+		// 全选按钮
+		clickAll() {
+			if (this.checkAll == false) {
+				// alert('全选');
+				this.checkAll = true;
+			} else {
+				// alert('反选');
+				this.checkAll = false;
+			}
+			// alert(this.alltypeList.length);
+			this.$refs.multipleTable.toggleAllSelection();
 		},
 		/** 提交按钮 */
 		submitForm: function() {

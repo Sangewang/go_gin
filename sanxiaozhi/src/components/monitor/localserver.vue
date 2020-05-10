@@ -187,7 +187,7 @@ export default {
 		}, */
 		getList() {
 			getNServer(this.url, '').then(response => {
-				console.log(response);
+				// console.log(response);
 				this.server = response.old_data;
 				this.loading.close();
 			});
