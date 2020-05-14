@@ -1,5 +1,9 @@
 package model
 
+
+const BASE_NAME = "../pic/"
+
+
 type PicSys struct {
 	Name string `gorm:"column:pic_name"`
 	// Raw  map `json:"raw"`
@@ -15,3 +19,4 @@ type PicSys struct {
 	Name string `json:"name"`
 	Url []string `json:"url"`
  }
+

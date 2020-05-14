@@ -10,7 +10,7 @@ import (
 	"gin_demo/model"
 )
 
-const BASE_NAME = "./static/file/"
+const BASE_NAME = "../pic/"
 
 func RenderView(context *gin.Context) {
 	println(">>>> render to file upload view action start <<<<")

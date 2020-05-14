@@ -3,14 +3,19 @@ package controller
 import (
 	"fmt"
 	"log"
+	"os"
+	"io"
 	"io/ioutil"
-	"reflect"
-	"encoding/json"
+	"net/http"
+	// "reflect"
+	// "encoding/json"
 	"github.com/gin-gonic/gin"
 	"gin_demo/model"
 	// "gin_demo/database"
 	// "github.com/jinzhu/gorm"
 )
+
+
 
 // type来临时定义一个和model.Pic具有同样功能的类型
 type TPic model.PicSys
@@ -25,51 +30,45 @@ func (u TPic) ReflectCallFuncNoArgs() {
 }
 
 // 图片上传处理
-func PicUploadHandle(context *gin.Context) {
+
+func New_PicUploadHandle(context *gin.Context) {
 	log.Println(">>>> func PicUploadHandle start <<<<")
-
-	data, _ := ioutil.ReadAll(context.Request.Body)
-	fmt.Printf("ctx.Request.body: %v", string(data))
-	fmt.Println("reflect(data) = ", reflect.TypeOf(string(data)))
-	// var datajson model.Login
-	demoStr := string(data)
-	// 转换成unit8类型的数组
-	dat := []byte(demoStr)
-	fmt.Println("dat = ", dat)
-	// 定义一个 map
-	var m map[string]PicList
-    // 注意：反序列化 map，不需要 make，因为 make 操作被封装到了 Unmarsha 函数中
-    err := json.Unmarshal(dat, &m)
-    if err != nil {
-        fmt.Println(err)
+	file, header, err := context.Request.FormFile("file0") 
+	if err != nil {
+		// context.String(http.StatusBadRequest, fmt.Sprintf("file err : %s", err.Error()))
+		fmt.Println(http.StatusBadRequest, fmt.Sprintf("file err : %s", err.Error()))
+		return
 	}
-
-	fmt.Println(" m = ", m)
-	picfile := m["picfile"]
-	fmt.Println("reflect(picfile) = ", reflect.TypeOf(picfile))
-	// fmt.Println(" picfile[0] = ", picfile[0])
-	t := reflect.TypeOf(picfile).Kind() //reflect.TypeOf(mm).Kind()获得变量类型，发现是slice
-	v := reflect.ValueOf(picfile)  //得到实际的值，通过v我们获取存储在里面的值，还可以去改变值
-	fmt.Println("reflect.TypeOf(picfile).Kind = ", t)
-	fmt.Println("reflect.ValueOf(picfile) = ", v)
-	fmt.Println("type:", v.Type())
+	filename := header.Filename
 	
-	for i := 0; i < v.Len(); i++ {
-		fmt.Println(v.Index(i))
-		eachPic := v.Index(i)
-		fmt.Println("eachPic type:", eachPic.Type())
-		// 极限恶心方法 => 应该有更好的方案
-		methodValue := eachPic.MethodByName("ReflectCallFuncNoArgs")
-		args := make([]reflect.Value, 0)
-		fmt.Println("args = ", args)
-		methodValue.Call(args)
-		fmt.Println("ret.Name = ", ret.Name, "ret.Size = ", ret.Size)
-		// 准备插入数据库
-		picsys := model.PicSys{Name: ret.Name, Size: ret.Size, Url: ret.Url}
-		gormdb.NewRecord(picsys) // => 主键为空返回`true`
-		gormdb.Create(&picsys)
+	fmt.Println("file = ", file, "filename = ", filename)
+
+	out, err := os.Create(model.BASE_NAME + filename)
+	if err != nil {
+	  log.Fatal(err)
 	}
-}	
+	defer out.Close()
+	_, err = io.Copy(out, file)
+	if err != nil {
+	  log.Fatal(err)
+	}
+}
+
+func PicUploadHandle(context *gin.Context) {
+	println(">>>> multi upload file by form action start <<<<")
+	form, err := context.MultipartForm()
+	checkError(err)
+	files := form.File["files"]
+
+	var er error
+	for _, f := range files {
+		// 使用gin自带的保存文件方法
+		println("f.Filename = ", f.Filename)
+		er = context.SaveUploadedFile(f, model.BASE_NAME + f.Filename)
+		checkError(err)
+	}
+	fmt.Println("er = ", er)
+}
 
 // 图片获取函数
 func PicDownloadHandle(context *gin.Context) {

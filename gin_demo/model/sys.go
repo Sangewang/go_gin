@@ -21,6 +21,8 @@ type SysDictType struct {
 	Remark	 string     
 	CreateTime string   
 }
+
+
 /*
 // 查询的结构体
 type SysDictType struct {
