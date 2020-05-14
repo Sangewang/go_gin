@@ -17,7 +17,7 @@ import result from '../components/map/result'
 import bdmap from '../components/map/bdmap'
 import gdmap from '../components/map/gdmap'
 import monitor from '../components/monitor/localserver'
-
+import picshowbak from '../components/map/picshowbak'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -116,7 +116,12 @@ export default new Router({
 					path: '/map/gdmap',
 					name: 'gdmap',
 					component: gdmap
-				}
+				},
+				{
+					path: '/map/picshowbak',
+					name: 'picshowbak',
+					component: picshowbak
+				},
 			]
 		}
 	]

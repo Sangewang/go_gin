@@ -22,14 +22,14 @@
 			:multiple="true"
 			:auto-upload="false"
 			:on-change="handleAddPic"
-			list-type="picture"
+			list-type="pictures"
 		>
 			<el-button slot="trigger" size="medium" type="primary">选取文件</el-button>
 			<el-button style="margin-left: 10px;" size="medium" type="success" @click="submitUpload">上传到服务器</el-button>
 			<el-button style="margin-left: 10px;" size="medium" type="danger" @click="clearFiles">重置</el-button>
 			<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 		</el-upload>
-		
+
 		<div style="margin: 100px 0;"></div>
 		<span font-size="20px">图片列表：</span>
 		<el-button style="margin-left: 10px;" size="medium" type="success" @click="refreshFiles">刷新</el-button>
@@ -37,12 +37,13 @@
 			<span class="demonstration">{{ fit.name }}</span>
 			<el-image style="width: 100px; height: 100px" :src="fit.url[0]" :preview-src-list="fit.url"></el-image>
 		</div>
-		
 	</div>
 </template>
 
 <script>
 import axios from 'axios';
+
+import blobToFormData from '../../util/toFormData';
 export default {
 	data() {
 		return {
@@ -60,7 +61,8 @@ export default {
 			showfileList: [
 				{ name: '1', url: ['https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'] },
 				{ name: '2', url: ['https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'] }
-			]
+			],
+			gCount: 0
 		};
 	},
 	methods: {
@@ -68,6 +70,27 @@ export default {
 			// console.log(this.fileList);
 			// alert(this.file-list);
 			// this.$refs.upload.submit();
+			let data = blobToFormData({
+				picfile: this.sendfileList
+			});
+			console.log("real data = ", data)
+			axios
+				.post('http://127.0.0.1:9090/pic/upload', data, {
+			'Content-Type': 'multipart/form-data'
+			
+		})
+				.then(successResponse => {
+					console.log(successResponse);
+					if (successResponse.data.code === 0) {
+						// alert(successResponse.data);
+					} else {
+						// alert(successResponse.data.msg);
+					}
+				})
+				.catch(failResponse => {
+					alert(failResponse);
+				});
+			/*
 			axios
 				.post('http://127.0.0.1:9090/pic/upload', {
 					picfile: this.sendfileList
@@ -75,7 +98,7 @@ export default {
 				.then(successResponse => {
 					console.log(successResponse);
 					if (successResponse.data.code === 0) {
-						alert(successResponse.data)
+						alert(successResponse.data);
 					} else {
 						alert(successResponse.data.msg);
 					}
@@ -83,11 +106,20 @@ export default {
 				.catch(failResponse => {
 					alert(failResponse);
 				});
+			*/
 		},
 		handleAddPic(file, fileList) {
 			console.log(fileList); //代表上传的全部图片列表
 			console.log(file); // 代表当前最新上传的文件
-			this.sendfileList = fileList;
+			
+			//  校验
+			const isLt2M = file.size / 1024 / 1024 < 5;
+			if (!isLt2M) {
+				alert('上传图片大小不能超过 5MB!');
+				return false;
+			}
+			this.gCount += 1
+			this.sendfileList = fileList.map(file => file.raw);
 			// 通过uid唯一标示是可以做到对某一张图片进行赋值的，接口已经准备好
 		},
 		handleRemove(file, fileList) {
@@ -104,14 +136,12 @@ export default {
 		},
 		refreshFiles() {
 			axios
-				.get('http://127.0.0.1:9090/pic/download', {
-					
-				})
+				.get('http://127.0.0.1:9090/pic/download', {})
 				.then(successResponse => {
 					console.log(successResponse);
 					if (successResponse.data.code === 0) {
 						// alert(successResponse.data)
-						this.showfileList = successResponse.data.data
+						this.showfileList = successResponse.data.data;
 					} else {
 						alert(successResponse.data.msg);
 					}

@@ -4,14 +4,15 @@ import router from '../router/index.js'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = 'http://127.0.0.1:9090';
 
-
 //http request 拦截器
 axios.interceptors.request.use(
 	config => {
 		// const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-		config.data = JSON.stringify(config.data);
+		// config.data = JSON.stringify(config.data);
 		config.headers = {
-			'Content-Type': 'application/x-www-form-urlencoded'
+			// 'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'multipart/form-data'
+			
 		}
 		// if(token){
 		//   config.params = {'token':token}
