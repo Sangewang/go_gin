@@ -127,7 +127,7 @@ export default {
 				this.breadcrumbItems  = '图片列表'
 				break;
 			case '7-1-2':
-				this.$router.push('/map/picshowbak');
+				this.$router.push('/map/picshow');
 				this.breadcrumbItems  = '备用'
 				break;
 			case '7-2-1':

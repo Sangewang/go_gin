@@ -22,7 +22,7 @@
 			:multiple="true"
 			:auto-upload="false"
 			:on-change="handleAddPic"
-			list-type="pictures"
+			list-type="picture"
 		>
 			<el-button slot="trigger" size="medium" type="primary">选取文件</el-button>
 			<el-button style="margin-left: 10px;" size="medium" type="success" @click="submitUpload">上传到服务器</el-button>
