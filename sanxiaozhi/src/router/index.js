@@ -17,6 +17,7 @@ import result from '../components/map/result'
 import bdmap from '../components/map/bdmap'
 import gdmap from '../components/map/gdmap'
 import monitor from '../components/monitor/localserver'
+import main from '../view/layout/main'
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -27,6 +28,7 @@ Vue.use(Router)
 
 export default new Router({
 	routes: [ 
+		{ path: '/main', name: "main", component: main },
 		/*
 		{ path: "/home", name: "home", component: home },
 		{ path: "/login", name: "login", component: login },

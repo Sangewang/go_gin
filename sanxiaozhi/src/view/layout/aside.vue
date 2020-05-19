@@ -1,14 +1,10 @@
 <template>
-	<div style="background-color: #EBEBEB;min-height:1000px">
-		<div style="width:100%;background-color: #636363; overflow: hidden">
-			<AppHeader />
-		</div>
-		
+	<div style="background-color: #EBEBEB;min-height:900px">
 		<div style="margin-top:5px">
 			<el-row :gutter="10">
 				<el-col :xs="4" :sm="4" :md="4" :lg="4">
 					<div>
-						<el-menu default-active="1" class="el-menu-vertical-demo" style="min-height:1000px" @select="handleSelect">
+						<el-menu default-active="1" class="el-menu-vertical-demo" style="min-height:900px" @select="handleSelect">
 							<el-menu-item index="1">
 								<i class="el-icon-setting"></i>
 								基础信息
@@ -62,27 +58,12 @@
 					</div>
 					<div style="margin-top:10px"><router-view></router-view></div>
 				</el-col>
-				<!--
-				<el-col :xs="20" :sm="20" :md="20" :lg="20">
-					<div>
-						<div style="border: 1px solid #A6A6A6; border-radius:6px; padding:5px; margin:2px; background-color: white">
-							<el-breadcrumb separator="/">
-								<el-breadcrumb-item>{{ breadcrumbItems }}</el-breadcrumb-item>
-							</el-breadcrumb>
-						</div>
-					</div>
-					<div style="margin-top:10px"><router-view></router-view></div>
-				</el-col>
-				-->
 			</el-row>
 		</div>
-		<AppFooter />
 	</div>
 </template>
 	
 <script type="text/ecmascript-6">
-	import AppHeader from './Header'
-	import AppFooter from './Footer'
 export default {
   data(){
     return {
@@ -90,10 +71,6 @@ export default {
       breadcrumbItems: '基础信息',
     }
   },
-  components: {
-		AppHeader,
-		AppFooter
-	},
   methods:{
     handleIconClick(ev) {
       console.log(ev);
