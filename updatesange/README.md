@@ -37,3 +37,9 @@ npm install vuex --save
 npm install --save api/login js-cookie
 ### 7、用于和后端发请求
 npm install --save axios
+### 8、进度条
+npm install --save nprogress
+### 9、饿了吗
+npm install --save element-ui
+### 10、安装图表
+npm i v-charts echarts -S

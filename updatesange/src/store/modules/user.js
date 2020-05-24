@@ -20,6 +20,7 @@ const user = {
 		uid: undefined,
 		auth_type: '',
 		token: Cookies.get('Admin-Token'),
+		// token: "Cookies.get('Admin-Token')",
 		name: '',
 		avatar: '',
 		introduction: '',
@@ -87,12 +88,14 @@ const user = {
 			commit
 		}, userInfo) {
 			const email = userInfo.email.trim();
+			// alert(email);
 			return new Promise((resolve, reject) => {
 				loginByEmail(email, userInfo.password).then(response => {
 					const data = response.data;
-					console.log(response.data);
-					Cookies.set('Admin-Token', response.data.token);
-					commit('SET_TOKEN', data.token);
+					console.log("store response.data = ", response.data);
+					let currData = data.data;
+					Cookies.set('Admin-Token', currData.token);
+					commit('SET_TOKEN', currData.token);
 					commit('SET_EMAIL', email);
 					resolve();
 				}).catch(error => {
@@ -109,11 +112,13 @@ const user = {
 			return new Promise((resolve, reject) => {
 				getInfo(state.token).then(response => {
 					const data = response.data;
-					commit('SET_ROLES', data.role);
-					commit('SET_NAME', data.name);
-					commit('SET_AVATAR', data.avatar);
-					commit('SET_UID', data.uid);
-					commit('SET_INTRODUCTION', data.introduction);
+					console.log("GetInfo data = ", data)
+					let retData = data.data
+					commit('SET_ROLES', retData.role);
+					commit('SET_NAME', retData.name);
+					commit('SET_AVATAR', retData.avatar);
+					commit('SET_UID', retData.uid);
+					commit('SET_INTRODUCTION', retData.introduction);
 					resolve(response);
 				}).catch(error => {
 					reject(error);

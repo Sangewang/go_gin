@@ -1,6 +1,6 @@
 <template>
-	<div class="login-container" style="background-color: #141a48;margin: 0px;overflow: hidden;">
-		<div id="canvascontainer" ref="can"></div>
+	<div class="login-container" style="background-color: #141a48;margin: 0px;overflow: hidden; height: 100%;">
+		<div id="canvascontainer" ref='can'></div>
 		<Form ref="loginForm" autoComplete="on" :model="loginForm" :rules="loginRules" class="card-box login-form">
 			<Form-item prop="email">
 				<Input type="text" v-model="loginForm.email" placeholder="Username" autoComplete="on">
@@ -71,10 +71,11 @@
 		// 挂在成功后执行的函数
 		mounted() {
 			// alert("mounted");
-			init();
+			this.init();
 			animate();
 		},
 		methods: {
+			init,
 			handleLogin() {
 				// alert("登陆");
 				this.$refs.loginForm.validate(valid => {
@@ -82,7 +83,6 @@
 						this.loading = true;
 						this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
 						this.$Message.success('登录成功');
-						
 						this.loading = false;
 						this.$router.push({ path: '/' });
 						}).catch(err => {
@@ -100,7 +100,8 @@
 	
 	function init() {
 		container = document.createElement( 'div' );
-		document.body.appendChild( container );
+		// document.body.appendChild( container ); // => 这个是整个生命周期都有效
+		this.$refs.can.appendChild( container );  
 		camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
 		camera.position.z = 1000;
 		scene = new THREE.Scene();
