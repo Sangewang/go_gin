@@ -11,9 +11,11 @@
 			<Col :xs="12" :sm="12" :md="8" :lg="8">     
 				<vue-calendar></vue-calendar>
 			</Col>
+			<!--
 			<Col :xs="12" :sm="12" :md="9" :lg="9">
 				pass
 			</Col>
+			-->
 		</Row>
 	</div>
 	
@@ -33,7 +35,7 @@
 			let token=this.$store.getters.token;
 			token = 'admin'
 			this.$Notice.success({
-				title: '欢迎使用 WZ 框架',
+				title: '欢迎使用 LW 框架',
 				desc: `你的账户权限是 ${token} 
 						<br>
 						喜欢就去github给个 start 鼓励一下吧`,

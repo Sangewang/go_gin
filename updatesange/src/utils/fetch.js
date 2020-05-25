@@ -5,7 +5,8 @@ import vue from 'vue';
 
 // 创建axios实例
 const service = axios.create({
-	baseURL: 'http://127.0.0.1:9090', // api的base_url
+	// baseURL: 'http://127.0.0.1:9090', // api的base_url
+	baseURL: 'http://172.22.200.29:9090', // api的base_url
 	timeout: 5000 // 请求超时时间
 });
 

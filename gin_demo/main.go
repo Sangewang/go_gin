@@ -27,6 +27,7 @@ func main() {
 	{
 		// 确认用户邮件注册信息
 		login.POST("/loginbyemail", controller.ConfirmLoginEmail)
+		login.POST("/logout", controller.ConfirmLoginOut)
 	}
 
 	// 路由组 user

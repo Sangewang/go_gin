@@ -26,3 +26,11 @@ func ConfirmLoginEmail(context *gin.Context) {
 	})
 }
 
+func ConfirmLoginOut(context *gin.Context) {
+	fmt.Println(">>>> ConfirmLoginOut action start <<<<")
+	context.JSON(200, gin.H{
+		"code" : 0,
+		"msg"  : "验证成功",
+		"data" : "",
+	})
+}
