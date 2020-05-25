@@ -37,4 +37,8 @@ export default {
 .nav-link {
   cursor:pointer;
 }
+/*
+.nav-item {
+	padding-left: 10px !important;
+}*/
 </style>

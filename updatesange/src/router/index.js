@@ -19,7 +19,8 @@ import MapResult from '../views/map/result.vue'
 import BdMap from '../views/map/bdmap.vue'
 import GdMap from '../views/map/gdmap.vue'
 // import System from '../views/system/system.vue'
-import Log from '../views/system/log.vue'
+import LogSearch from '../views/system/log.vue'
+import LogDownload from '../views/system/log.vue'
 import Create from '../views/system/create.vue'
 import Table from '../views/system/table.vue'
 
@@ -65,10 +66,14 @@ export const asyncRouterMap = [
 									{ path: 'create', name: '任务创建', icon:'md-color-filter', component: Create, } ,
 									{ path: 'table', name: '图标操作', icon:'md-apps', component: Table, } ,
 								]
-				
-				
 				},
-							{ path: 'log', name: '日志管理', icon: 'md-recording', component: Log, },
+						{ path: 'log', name: '日志管理', icon: 'md-recording', redirect: '/system/log/search' ,
+								component: { render (c) {return c('router-view') }},
+								children: [
+									{ path: 'search', name: '日志查询', icon:'md-search', component: LogSearch, } ,
+									{ path: 'download', name: '日志下载', icon:'md-download', component: LogDownload, } ,
+								]
+				},
 				]
 			},
 		]
