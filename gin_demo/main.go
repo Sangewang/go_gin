@@ -22,6 +22,13 @@ func main() {
 	router.LoadHTMLGlob("template/*")
 	router.GET("/hello", hello) // hello 函数处理"/hello"的请求
 
+	// 路由组login
+	login := router.Group("/login")
+	{
+		// 确认用户邮件注册信息
+		login.POST("/loginbyemail", controller.ConfirmLoginEmail)
+	}
+
 	// 路由组 user
 	user := router.Group("/user")
 	{	// 请求参数在请求路由上
@@ -32,6 +39,8 @@ func main() {
 		user.POST("/insert", controller.InsertNewUser)
 		user.GET("/form", controller.RenderForm)
 		user.POST("/form/post", controller.PostForm)
+
+		user.GET("/info", controller.GetUserInfo)
 		// 可以添加其它的路由请求
 	}
 

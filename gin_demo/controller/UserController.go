@@ -362,3 +362,22 @@ func checkError(e error) {
 	}
 }
 
+// 获取用户信息
+func GetUserInfo(context *gin.Context) {
+	fmt.Println(" >>> GetUserInfo start <<< ")
+	token := context.Query("token")
+	fmt.Println("GetUserInfo token = ", token)
+
+	var s model.UserInfo
+	s.Name = "Super Admin"
+	s.Role = "admin"
+	s.Uid = "001"
+	s.Avatar = "admin"
+	s.Introduction = "超级管理员"
+	context.JSON(200, gin.H{
+		"code" : 0,
+		"msg"  : "验证成功",
+		"data" : s,
+	})
+
+}
