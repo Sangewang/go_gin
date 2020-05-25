@@ -33,9 +33,7 @@
 						<DropdownItem><a href="https://blog.csdn.net/u011559236" target="_blank"></a>
 						<p style="color: #000000">csdn</p>
 						</DropdownItem>
-						<DropdownItem>Mac OS X</DropdownItem>
-						<DropdownItem>Windows</DropdownItem>
-						<DropdownItem>Core OS</DropdownItem>
+						<DropdownItem>Vue Js</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
 			</li>

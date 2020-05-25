@@ -9,13 +9,19 @@ import Local from '../views/monitor/localserver.vue'
 import Remote from '../views/monitor/remoteserver.vue'
 import Map from '../containers/Map.vue'
 import MapIntroduction from '../views/map/introduction.vue'
-import MapUpload from '../views/map/upload.vue'
+// import MapUpload from '../views/map/upload.vue'
+import DataUpload from '../views/map/dataupload.vue'
+import PicUpload from '../views/map/picupload.vue'
 import MapCreate from '../views/map/create.vue'
 import MapSearch from '../views/map/search.vue'
 import MapDevice from '../views/map/device.vue'
 import MapResult from '../views/map/result.vue'
 import BdMap from '../views/map/bdmap.vue'
 import GdMap from '../views/map/gdmap.vue'
+// import System from '../views/system/system.vue'
+import Log from '../views/system/log.vue'
+import Create from '../views/system/create.vue'
+import Table from '../views/system/table.vue'
 
 Vue.use(Router)
 
@@ -51,6 +57,20 @@ export const asyncRouterMap = [
 							{ path: 'remote', name: '远程状态', icon:'md-flame', component: Remote, } ,
 				]
 			},
+			{ path: '/system', name: '系统工具', icon:'md-construct', redirect: '/system/task',
+				component: { render (c) {return c('router-view') }},
+				children: [ { path: 'task', name: '系统配置', icon: 'md-construct', redirect: '/system/task/create', 
+								component: { render (c) {return c('router-view') }},
+								children: [
+									{ path: 'create', name: '任务创建', icon:'md-color-filter', component: Create, } ,
+									{ path: 'table', name: '图标操作', icon:'md-apps', component: Table, } ,
+								]
+				
+				
+				},
+							{ path: 'log', name: '日志管理', icon: 'md-recording', component: Log, },
+				]
+			},
 		]
 	},
 	
@@ -62,7 +82,13 @@ export const asyncRouterMap = [
 		hidden: false,
 		children: [
 			{ path: '/map/introduction', name: '系统简介', icon: 'md-locate', component: MapIntroduction },
-			{ path: '/map/upload', name: '数据上传', icon: 'md-cloud-upload', component: MapUpload },
+			{ path: '/upload', name: '数据上传', icon: 'md-cloud-upload', redirect: '/map/upload', 
+				component: { render (c) {return c('router-view') }},
+				children: [ { path: 'dataupload', name: '文件上传', icon: 'md-repeat', component: DataUpload, }, 
+							{ path: 'picupload', name: '图片上传', icon: 'md-image', component: PicUpload, }, 
+				]
+			},
+			//{ path: '/map/upload', name: '数据上传', icon: 'md-cloud-upload', component: MapUpload },
 			{ path: '/map/create', name: '任务创建', icon: 'md-send', component: MapCreate },
 			{ path: '/map/search', name: '任务查询', icon: 'md-search', component: MapSearch },
 			{ path: '/map/device', name: '设备状态', icon: 'logo-android', component: MapDevice },
