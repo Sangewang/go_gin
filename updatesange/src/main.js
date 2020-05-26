@@ -7,10 +7,14 @@ import store from './store';
 import './ui.js' 
 import './login.js' 
 import VCharts from 'v-charts'
+import Pagination from './components/Pagination.vue'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VCharts)
+
+// 全局组件挂载
+Vue.component('Pagination', Pagination)
 
 new Vue({
   render: h => h(App),

@@ -9,7 +9,6 @@ import Local from '../views/monitor/localserver.vue'
 import Remote from '../views/monitor/remoteserver.vue'
 import Map from '../containers/Map.vue'
 import MapIntroduction from '../views/map/introduction.vue'
-// import MapUpload from '../views/map/upload.vue'
 import DataUpload from '../views/map/dataupload.vue'
 import PicUpload from '../views/map/picupload.vue'
 import MapCreate from '../views/map/create.vue'
@@ -18,11 +17,11 @@ import MapDevice from '../views/map/device.vue'
 import MapResult from '../views/map/result.vue'
 import BdMap from '../views/map/bdmap.vue'
 import GdMap from '../views/map/gdmap.vue'
-// import System from '../views/system/system.vue'
 import LogSearch from '../views/system/log.vue'
 import LogDownload from '../views/system/log.vue'
 import Create from '../views/system/create.vue'
 import Table from '../views/system/table.vue'
+import Company from '../views/system/company.vue'
 
 Vue.use(Router)
 
@@ -64,7 +63,8 @@ export const asyncRouterMap = [
 								component: { render (c) {return c('router-view') }},
 								children: [
 									{ path: 'create', name: '任务创建', icon:'md-color-filter', component: Create, } ,
-									{ path: 'table', name: '图标操作', icon:'md-apps', component: Table, } ,
+									{ path: 'table', name: '图表操作', icon:'md-apps', component: Table, } ,
+									{ path: 'company', name: '我爱我司', icon:'md-compass', component: Company, } ,
 								]
 				},
 						{ path: 'log', name: '日志管理', icon: 'md-recording', redirect: '/system/log/search' ,

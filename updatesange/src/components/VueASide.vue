@@ -3,14 +3,14 @@
 		<div class="aside-options">
 			<div class="clearfix mt-4">
 				<h6>
-					<b>待办事项 1</b>
+					<b>今日头条</b>
 					<i-switch class="float-right">
 						<span slot="open">开</span>
 						<span slot="close">关</span>
 					</i-switch>
 				</h6>
 			</div>
-			<div><p class="text-muted">明天提醒我吃黄焖鸡</p></div>
+			<div><p class="text-muted">信息创造价值</p></div>
 		</div>
 
 		<hr />

@@ -39,7 +39,7 @@
 			</li>
 
 			<li class="nav-item header-item">
-				<router-link tag="div" to="/home1" style="height:55px;" class="nav-link">
+				<router-link tag="div" to="/dashboard" style="height:55px;" class="nav-link" disabled>
 					<p><Icon type="md-trophy" size="30" color="#2d8cf0"></Icon></p>
 					<p style="color:white">课外知识</p>
 				</router-link>
@@ -54,12 +54,10 @@
 			</li>
 
 			<Dropdown class="nav-item">
-				<a href="javascript:void(0)">
-					<span slot="button">
-						<img src="static/img/avatars/6.jpg" class="img-avatar" alt="o" />
-						<span class="d-md-down-none">admin</span>
-					</span>
-				</a>
+				<div class="demo-avatar">
+					<Avatar src="static/img/avatars/toutiao.png"></Avatar>
+					<span class="d-md-down-none" style="color: white;">admin</span>
+				</div>
 				<Dropdown-menu slot="list">
 					<Dropdown-item>
 						<p class="dropdown-itemp">
