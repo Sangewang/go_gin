@@ -42,7 +42,7 @@ router.beforeEach((to, from, next) => {
 						}) // hack方法 确保addRoutes已完成
 					})
 				}).catch(() => {
-					store.dispatch('FedLogOut').then(() => {
+					store.dispatch('LogOut').then(() => {
 						next({
 							path: '/login'
 						})

@@ -78,6 +78,7 @@ const permission = {
 		}, data) {
 			return new Promise(resolve => {
 				var roles = new Array()
+				console.log("data = ", data)
 				roles[0] = data // ["admin"]
 				let accessedRouters
 				if (roles.indexOf('admin') >= 0) {

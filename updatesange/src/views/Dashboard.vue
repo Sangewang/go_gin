@@ -8,6 +8,7 @@
 		</Row>
 		
 		<Row :gutter="16">
+			
 			<Col :xs="12" :sm="12" :md="8" :lg="8">     
 				<vue-calendar></vue-calendar>
 			</Col>
@@ -39,7 +40,7 @@
 				desc: `你的账户权限是 ${token} 
 						<br>
 						喜欢就去github给个 start 鼓励一下吧`,
-				duration: 5
+				duration: 3
 			});
 		}
 	}
