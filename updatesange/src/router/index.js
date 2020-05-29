@@ -22,14 +22,21 @@ import LogDownload from '../views/system/log.vue'
 import Create from '../views/system/create.vue'
 import Table from '../views/system/table.vue'
 import Company from '../views/system/company.vue'
+import Page404 from '../views/errorPages/Page404.vue'
+import Page500 from '../views/errorPages/Page500.vue'
 
 Vue.use(Router)
 
-export const constantRouterMap = [{
-	path: '/login',
-	component: login,
-	hidden: true
-}]
+export const constantRouterMap = [
+	{ path: '/login', component: login, hidden: true }, 
+	{ path: '/pages',redirect: '/pages/p404', name: 'Pages',
+		component: { render (c) { return c('router-view') } },
+		children: [
+			{ path: '404', name: 'Page404', component: Page404 },
+			{ path: '500', name: 'Page500',component: Page500 },
+		]
+    }
+]
 
 
 export default new Router({
@@ -78,7 +85,6 @@ export const asyncRouterMap = [
 			},
 		]
 	},
-	
 	{
 		path: '/map',
 		redirect: '/map/introduction',
@@ -105,5 +111,6 @@ export const asyncRouterMap = [
 				]
 			},
 		]
-	}
+	},
+	{ path: '*', redirect: '/pages/404', hidden: true }
 ]
