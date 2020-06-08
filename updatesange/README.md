@@ -28,13 +28,14 @@ npm install vue-router
 npm install view-design --save
 ### 3、vue项目中引用three，为了制作炫酷的动画
 npm install three --save
-### 4、登陆动画的style格式需要
+### 4.1、登陆动画的style格式需要
 npm install sass-loader --save
+### 4.2、登陆动画的style格式需要
 npm install node-sass --save
 ### 5、vue的状态管理
 npm install vuex --save
 ### 6、用户登陆的cookie管理
-npm install --save api/login js-cookie
+npm install --save js-cookie
 ### 7、用于和后端发请求
 npm install --save axios
 ### 8、进度条
@@ -43,3 +44,5 @@ npm install --save nprogress
 npm install --save element-ui
 ### 10、安装图表
 npm i v-charts echarts -S
+### 11、文件相关安装
+npm install --save file-saver vuex xlsx

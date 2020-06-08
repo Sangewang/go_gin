@@ -88,7 +88,7 @@ func CpuCondition() (string, int32, float64) {
 
 // 硬盘disk情况
 func DiskConditon() (string, uint64, uint64, float64) {
-	currDisk, _ := disk.Usage("/Users/linwang")
+	currDisk, _ := disk.Usage("/Users/bytedance")
 	diskPath := currDisk.Path
 	diskTotal := currDisk.Total / currG
 	diskFree := currDisk.Free / currG
